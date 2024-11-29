@@ -158,6 +158,68 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('premiere-logo').src = `${baseUrl}/assets/adobe-premiere-pro-logo.svg`;
     document.getElementById('aftereffects-logo').src = `${baseUrl}/assets/after-effects-1.svg`;
     document.getElementById('mediaencoder-logo').src = `${baseUrl}/assets/Adobe_Media_Encoder_Icon.svg`;
+
+    // Scroll animasyonlarını ayarla
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Hakkımda bölümü animasyonu
+    gsap.from('#about', {
+        scrollTrigger: {
+            trigger: '#about',
+            start: 'top center+=100',
+            toggleActions: 'play none none reverse'
+        },
+        opacity: 0,
+        y: 50,
+        duration: 1
+    });
+
+    // İletişim bölümü animasyonu
+    gsap.from('#contact', {
+        scrollTrigger: {
+            trigger: '#contact',
+            start: 'top center+=100',
+            toggleActions: 'play none none reverse'
+        },
+        opacity: 0,
+        y: 50,
+        duration: 1
+    });
+
+    // Menü linklerini ayarla
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute('href');
+            const targetSection = document.querySelector(targetId);
+            if (targetSection) {
+                targetSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
+
+    // Counter animasyonları
+    const counters = document.querySelectorAll('.counter');
+    counters.forEach(counter => {
+        const target = parseInt(counter.textContent);
+        let count = 0;
+        const updateCounter = () => {
+            const increment = target / 50;
+            if (count < target) {
+                count += increment;
+                counter.textContent = Math.ceil(count) + (counter.textContent.includes('+') ? '+' : '');
+                requestAnimationFrame(updateCounter);
+            } else {
+                counter.textContent = target + (counter.textContent.includes('+') ? '+' : '');
+            }
+        };
+        
+        ScrollTrigger.create({
+            trigger: counter,
+            start: 'top center+=100',
+            onEnter: updateCounter
+        });
+    });
 });
 
 // Portfolio items data
