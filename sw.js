@@ -1,19 +1,24 @@
 const CACHE_NAME = 'metehanhacer-cache-v1';
+
+// Base URL'i belirle
+const isGitHubPages = self.location.hostname.includes('github.io');
+const baseUrl = isGitHubPages ? '/metehanhacer.com' : '';
+
 const urlsToCache = [
-    '/metehanhacer.com/',
-    '/metehanhacer.com/index.html',
-    '/metehanhacer.com/main.js',
-    '/metehanhacer.com/styles.css',
-    '/metehanhacer.com/assets/zula_compressed.mp4',
-    '/metehanhacer.com/assets/corporate_compressed.mp4',
-    '/metehanhacer.com/assets/yeni_klip_compressed.mp4',
-    '/metehanhacer.com/assets/halloween_compressed.mp4',
-    '/metehanhacer.com/assets/son_deneme_compressed.mp4',
-    '/metehanhacer.com/assets/sirk_compressed.mp4',
-    '/metehanhacer.com/assets/4_compressed.mp4',
-    '/metehanhacer.com/assets/3_compressed.mp4',
-    '/metehanhacer.com/assets/comp_1_compressed.mp4',
-    '/metehanhacer.com/assets/alevli_adidas_compressed.mp4'
+    `${baseUrl}/`,
+    `${baseUrl}/index.html`,
+    `${baseUrl}/main.js`,
+    `${baseUrl}/styles.css`,
+    `${baseUrl}/assets/zula_compressed.mp4`,
+    `${baseUrl}/assets/corporate_compressed.mp4`,
+    `${baseUrl}/assets/yeni_klip_compressed.mp4`,
+    `${baseUrl}/assets/halloween_compressed.mp4`,
+    `${baseUrl}/assets/son_deneme_compressed.mp4`,
+    `${baseUrl}/assets/sirk_compressed.mp4`,
+    `${baseUrl}/assets/4_compressed.mp4`,
+    `${baseUrl}/assets/3_compressed.mp4`,
+    `${baseUrl}/assets/comp_1_compressed.mp4`,
+    `${baseUrl}/assets/alevli_adidas_compressed.mp4`
 ];
 
 // Video uzantılarını tanımla

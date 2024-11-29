@@ -207,10 +207,11 @@
         // Service Worker Registration
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                const swPath = '/metehanhacer.com/sw.js';
+                const isGitHubPages = window.location.hostname.includes('github.io');
+                const swPath = isGitHubPages ? '/metehanhacer.com/sw.js' : '/sw.js';
                 navigator.serviceWorker.register(swPath)
                     .then(registration => {
-                        console.log('ServiceWorker registration successful');
+                        console.log('ServiceWorker başarıyla kaydedildi:', registration.scope);
                     })
                     .catch(err => {
                         console.log('ServiceWorker kaydı başarısız:', err);

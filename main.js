@@ -148,76 +148,80 @@ function initializeAnimations() {
     });
 }
 
+// Base URL'i belirle
+const isGitHubPages = window.location.hostname.includes('github.io');
+const baseUrl = isGitHubPages ? '/metehanhacer.com' : '';
+
 // Portfolio items data
 const portfolioItems = [
     {
         title: 'Oyun Editi Örneği',
         description: 'Zula oyun montajı',
-        thumbnail: '/metehanhacer.com/assets/zula.jpg',
-        video: '/metehanhacer.com/assets/zula_compressed.mp4',
+        thumbnail: `${baseUrl}/assets/zula.jpg`,
+        video: `${baseUrl}/assets/zula_compressed.mp4`,
         type: 'game'
     },
     {
         title: 'Tekstil Reklamı',
         description: 'Kurumsal tanıtım',
-        thumbnail: '/metehanhacer.com/assets/corporate.jpg',
-        video: '/metehanhacer.com/assets/corporate_compressed.mp4',
+        thumbnail: `${baseUrl}/assets/corporate.jpg`,
+        video: `${baseUrl}/assets/corporate_compressed.mp4`,
         type: 'corporate'
     },
     {
         title: 'Emlak Reklamı',
         description: 'Emlak tanıtım',
-        thumbnail: '/metehanhacer.com/assets/yeni-klip.jpg',
-        video: '/metehanhacer.com/assets/yeni_klip_compressed.mp4',
+        thumbnail: `${baseUrl}/assets/yeni-klip.jpg`,
+        video: `${baseUrl}/assets/yeni_klip_compressed.mp4`,
         type: 'estate'
     },
     {
         title: 'Halloween',
         description: 'Cadılar bayramında eğlenceli anlar',
-        thumbnail: '/metehanhacer.com/assets/Ekran görüntüsü 2024-11-26 075159.png',
-        video: '/metehanhacer.com/assets/halloween_compressed.mp4',
+        thumbnail: `${baseUrl}/assets/Ekran görüntüsü 2024-11-26 075159.png`,
+        video: `${baseUrl}/assets/halloween_compressed.mp4`,
         type: 'game'
     },
     {
         title: 'İçecek Hazırlama',
         description: 'İçecek hazırlama videosu',
-        thumbnail: '/metehanhacer.com/assets/Ekran görüntüsü 2024-11-26 195713.png',
-        video: '/metehanhacer.com/assets/son_deneme_compressed.mp4',
+        thumbnail: `${baseUrl}/assets/Ekran görüntüsü 2024-11-26 195713.png`,
+        video: `${baseUrl}/assets/son_deneme_compressed.mp4`,
         type: 'special'
     },
     {
         title: 'Sirk Videosu',
         description: 'Kurumsal tanıtım',
-        thumbnail: '/metehanhacer.com/assets/Ekran görüntüsü 2024-11-26 193557.png',
-        video: '/metehanhacer.com/assets/sirk_compressed.mp4',
+        thumbnail: `${baseUrl}/assets/Ekran görüntüsü 2024-11-26 193557.png`,
+        video: `${baseUrl}/assets/sirk_compressed.mp4`,
         type: 'corporate'
     },
     {
         title: 'Oyun Editi Örneği 2',
         description: 'Zula oyun montajı',
-        thumbnail: '/metehanhacer.com/assets/Ekran görüntüsü 2024-11-26 063458.png',
-        video: '/metehanhacer.com/assets/4_compressed.mp4',
+        thumbnail: `${baseUrl}/assets/Ekran görüntüsü 2024-11-26 063458.png`,
+        video: `${baseUrl}/assets/4_compressed.mp4`,
         type: 'game'
     },
     {
         title: 'Tekstil Reklamı 2',
         description: 'Kurumsal Tanıtım',
-        thumbnail: '/metehanhacer.com/assets/Ekran görüntüsü 2024-11-26 235137.png',
-        video: '/metehanhacer.com/assets/3_compressed.mp4',
+        thumbnail: `${baseUrl}/assets/Ekran görüntüsü 2024-11-26 235137.png`,
+        video: `${baseUrl}/assets/3_compressed.mp4`,
         type: 'special'
     },
     {
         title: 'Sosyal Medya İçin Mizah İçerikleri',
         description: '',
-        thumbnail: '/metehanhacer.com/assets/Ekran görüntüsü 2024-11-27 013848.png',
-        video: '/metehanhacer.com/assets/comp_1_compressed.mp4',
+        thumbnail: `${baseUrl}/assets/Ekran görüntüsü 2024-11-27 013848.png`,
+        video: `${baseUrl}/assets/comp_1_compressed.mp4`,
         type: 'center'
     },
     {
         title: 'Logo Animasyonu Örneği',
         description: 'Animasyon Çalışmalarım',
-        thumbnail: '/metehanhacer.com/assets/Ekran görüntüsü 2024-11-28 201449.png',
-        video: '/metehanhacer.com/assets/alevli_adidas_compressed.mp4',
+        thumbnail: `${baseUrl}/assets/Ekran görüntüsü 2024-11-28 201449.png`,
+        video: `${baseUrl}/assets/alevli_adidas_compressed.mp4`,
         type: 'center-main'
     }
 ];
