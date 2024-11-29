@@ -195,6 +195,8 @@ function createPortfolioItem(title, description, imageSrc, videoSrc, type = '') 
         responsiveClasses = 'w-full md:w-[550px] lg:-ml-[32rem]';
     } else if (title === 'Sirk Videosu') {
         responsiveClasses = 'w-full md:w-[500px] lg:-ml-[33rem]';
+    } else if (title === 'Sosyal Medya İçin Mizah İçerikleri') {
+        responsiveClasses = 'w-full md:w-[570px] lg:-ml-[5rem] relative lg:-top-[44rem] z-50';
     } else {
         responsiveClasses = 'w-full';
     }
