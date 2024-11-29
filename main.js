@@ -175,49 +175,49 @@ const portfolioItems = [
         title: 'Halloween',
         description: 'Cadılar bayramında eğlenceli anlar',
         thumbnail: 'assets/Ekran görüntüsü 2024-11-26 075159.png',
-        video: 'assets/halloween_compressed.mp4',
+        video: 'https://res.cloudinary.com/drhgvt8rz/video/upload/v1703797234/metehanhacer/halloween_compressed.mp4',
         type: 'game'
     },
     {
         title: 'İçecek Hazırlama',
         description: 'İçecek hazırlama videosu',
         thumbnail: 'assets/Ekran görüntüsü 2024-11-26 195713.png',
-        video: 'assets/son_deneme_compressed.mp4',
+        video: 'https://res.cloudinary.com/drhgvt8rz/video/upload/v1703797235/metehanhacer/son_deneme_compressed.mp4',
         type: 'special'
     },
     {
         title: 'Sirk Videosu',
         description: 'Kurumsal tanıtım',
         thumbnail: 'assets/Ekran görüntüsü 2024-11-26 193557.png',
-        video: 'assets/sirk_compressed.mp4',
+        video: 'https://res.cloudinary.com/drhgvt8rz/video/upload/v1703797236/metehanhacer/sirk_compressed.mp4',
         type: 'corporate'
     },
     {
         title: 'Oyun Editi Örneği 2',
         description: 'Zula oyun montajı',
         thumbnail: 'assets/Ekran görüntüsü 2024-11-26 063458.png',
-        video: 'assets/4_compressed.mp4',
+        video: 'https://res.cloudinary.com/drhgvt8rz/video/upload/v1703797237/metehanhacer/4_compressed.mp4',
         type: 'game'
     },
     {
         title: 'Tekstil Reklamı 2',
         description: 'Kurumsal Tanıtım',
         thumbnail: 'assets/Ekran görüntüsü 2024-11-26 235137.png',
-        video: 'assets/3_compressed.mp4',
+        video: 'https://res.cloudinary.com/drhgvt8rz/video/upload/v1703797238/metehanhacer/3_compressed.mp4',
         type: 'special'
     },
     {
         title: 'Sosyal Medya İçin Mizah İçerikleri',
         description: '',
         thumbnail: 'assets/Ekran görüntüsü 2024-11-27 013848.png',
-        video: 'assets/comp_1_compressed.mp4',
+        video: 'https://res.cloudinary.com/drhgvt8rz/video/upload/v1703797239/metehanhacer/comp_1_compressed.mp4',
         type: 'center'
     },
     {
         title: 'Logo Animasyonu Örneği',
         description: 'Animasyon Çalışmalarım',
         thumbnail: 'assets/Ekran görüntüsü 2024-11-28 201449.png',
-        video: 'assets/alevli_adidas_compressed.mp4',
+        video: 'https://res.cloudinary.com/drhgvt8rz/video/upload/v1703797240/metehanhacer/alevli_adidas_compressed.mp4',
         type: 'center-main'
     }
 ];
