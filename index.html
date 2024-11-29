@@ -78,17 +78,17 @@
 </nav>
 
     <!-- Hero Section -->
-    <section id="hero" class="min-h-screen flex items-center justify-center bg-gradient-to-b from-black via-purple-900/10 to-black pt-20 px-4 sm:px-6">
-        <div class="hero-content container mx-auto text-center max-w-4xl">
-            <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400">
+    <section id="hero" class="min-h-screen flex items-center justify-center relative overflow-hidden px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-black via-purple-900/10 to-black pt-20">
+        <div class="max-w-7xl mx-auto text-center">
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400">
                 Metehan Hacer
             </h1>
-            <p class="text-lg sm:text-xl md:text-2xl text-gray-400 mb-8">Video Editörü & İçerik Üreticisi</p>
+            <p class="text-lg sm:text-xl lg:text-2xl text-gray-300 mb-8">Video Editörü & İçerik Üreticisi</p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="#portfolio" class="px-8 py-3 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg text-white font-medium hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:shadow-purple-500/20 w-full sm:w-auto">
+                <a href="#portfolio" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700 transition-colors">
                     Portfolyo
                 </a>
-                <a href="#contact" class="px-8 py-3 bg-black/40 backdrop-blur-sm border border-purple-500/30 rounded-lg text-white font-medium hover:bg-black/60 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:shadow-purple-500/20 w-full sm:w-auto">
+                <a href="#contact" class="inline-flex items-center justify-center px-6 py-3 border border-purple-500 text-base font-medium rounded-md text-purple-400 hover:text-purple-300 transition-colors">
                     İletişime Geç
                 </a>
             </div>
@@ -96,88 +96,134 @@
     </section>
 
     <!-- Portfolio Section -->
-    <section id="portfolio" class="py-20 min-h-screen bg-gradient-to-b from-black via-purple-900/10 to-black">
-        <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold mb-16 text-center">Portfolyo</h2>
-            <div id="portfolio-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <section id="portfolio" class="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-black via-purple-900/10 to-black">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl sm:text-4xl font-bold text-center mb-16">Portfolyo</h2>
+            <div id="portfolio-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
                 <!-- Portfolio items will be dynamically added here -->
             </div>
         </div>
     </section>
 
     <!-- About Section -->
-    <section id="about" class="min-h-screen bg-gradient-to-b from-black via-purple-900/10 to-black py-20 px-4 sm:px-6" aria-labelledby="about-heading">
-        <div class="container mx-auto max-w-6xl">
-            <h2 id="about-heading" class="text-3xl sm:text-4xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400 hover:from-purple-500 hover:to-blue-500 transition-all duration-300">Hakkımda</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Sol Kolon - Tanıtım -->
-                <div class="about-content space-y-6">
-                    <article class="bg-black/50 backdrop-blur-md rounded-xl p-6 sm:p-8 border border-purple-500/20 hover:border-purple-500/40 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl hover:shadow-purple-500/20">
-                        <h3 class="text-xl sm:text-2xl font-semibold mb-6 text-purple-400">Profesyonel Video Editörü</h3>
-                        <p class="text-gray-300 text-base sm:text-lg leading-relaxed">
-                            Merhaba! Ben Metehan. Video prodüksiyon ve post-prodüksiyon konusunda uzmanlaşmış bir içerik üreticisiyim. Yaratıcı vizyonum ve teknik becerilerimle, her projeye özgün bir yaklaşım getiriyorum.
+    <section id="about" class="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-black via-purple-900/10 to-black">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl sm:text-4xl font-bold text-center mb-16">Hakkımda</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+                <!-- Sol Kolon - Yetenekler ve Araçlar -->
+                <div class="space-y-8">
+                    <!-- Profesyonel Bilgi -->
+                    <article class="bg-black/50 backdrop-blur-md rounded-xl p-8 border border-purple-500/20 hover:border-purple-500/40 transition-all duration-300">
+                        <div class="flex items-center mb-6">
+                            <div class="w-12 h-12 rounded-lg bg-purple-500/20 flex items-center justify-center mr-4">
+                                <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                                </svg>
+                            </div>
+                            <h3 class="text-2xl font-bold text-purple-400">Profesyonel Video Editörü</h3>
+                        </div>
+                        <p class="text-gray-300 text-lg leading-relaxed">
+                            4+ yıllık deneyimimle, her türlü video projesinde profesyonel çözümler sunuyorum. 
+                            Reklam, sosyal medya, kurumsal tanıtım ve daha fazlası için yaratıcı içerikler üretiyorum.
                         </p>
                     </article>
 
-                    <article class="bg-black/50 backdrop-blur-md rounded-xl p-6 sm:p-8 border border-purple-500/20 hover:border-purple-500/40 transition-all duration-300">
-                        <h3 class="text-xl sm:text-2xl font-semibold mb-6 text-purple-400">Kullandığım Yazılımlar</h3>
-                        <div class="grid grid-cols-3 gap-4" role="list">
-                            <!-- Software Icons -->
+                    <!-- Yazılımlar -->
+                    <article class="bg-black/50 backdrop-blur-md rounded-xl p-8 border border-purple-500/20 hover:border-purple-500/40 transition-all duration-300">
+                        <div class="flex items-center mb-6">
+                            <div class="w-12 h-12 rounded-lg bg-purple-500/20 flex items-center justify-center mr-4">
+                                <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                </svg>
+                            </div>
+                            <h3 class="text-2xl font-bold text-purple-400">Kullandığım Yazılımlar</h3>
+                        </div>
+                        <div class="grid grid-cols-3 gap-6" role="list">
                             <div class="software-item group" role="listitem">
-                                <div class="relative bg-black/40 backdrop-blur-sm rounded-xl p-3 sm:p-4 border border-purple-500/10 hover:border-purple-500/30 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:shadow-purple-500/20">
-                                    <img src="assets/adobe-premiere-pro-logo.svg" alt="Adobe Premiere Pro" class="w-12 sm:w-16 h-12 sm:h-16 mx-auto mb-2 group-hover:scale-110 transition-transform" loading="lazy">
-                                    <span class="block text-center text-xs sm:text-sm text-gray-300 group-hover:text-purple-400">Premiere Pro</span>
+                                <div class="relative bg-black/40 backdrop-blur-sm rounded-xl p-4 border border-purple-500/10 hover:border-purple-500/30 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-lg hover:shadow-purple-500/20">
+                                    <img src="assets/adobe-premiere-pro-logo.svg" alt="Adobe Premiere Pro" class="w-16 h-16 mx-auto mb-3 group-hover:scale-110 transition-transform" loading="lazy">
+                                    <span class="block text-center text-sm text-gray-300 group-hover:text-purple-400 font-medium">Premiere Pro</span>
+                                    <div class="absolute inset-0 bg-gradient-to-b from-transparent to-purple-500/5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
                                 </div>
                             </div>
                             <div class="software-item group" role="listitem">
-                                <div class="relative bg-black/40 backdrop-blur-sm rounded-xl p-3 sm:p-4 border border-purple-500/10 hover:border-purple-500/30 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:shadow-purple-500/20">
-                                    <img src="assets/after-effects-1.svg" alt="Adobe After Effects" class="w-12 sm:w-16 h-12 sm:h-16 mx-auto mb-2 group-hover:scale-110 transition-transform" loading="lazy">
-                                    <span class="block text-center text-xs sm:text-sm text-gray-300 group-hover:text-purple-400">After Effects</span>
+                                <div class="relative bg-black/40 backdrop-blur-sm rounded-xl p-4 border border-purple-500/10 hover:border-purple-500/30 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-lg hover:shadow-purple-500/20">
+                                    <img src="assets/after-effects-1.svg" alt="Adobe After Effects" class="w-16 h-16 mx-auto mb-3 group-hover:scale-110 transition-transform" loading="lazy">
+                                    <span class="block text-center text-sm text-gray-300 group-hover:text-purple-400 font-medium">After Effects</span>
+                                    <div class="absolute inset-0 bg-gradient-to-b from-transparent to-purple-500/5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
                                 </div>
                             </div>
                             <div class="software-item group" role="listitem">
-                                <div class="relative bg-black/40 backdrop-blur-sm rounded-xl p-3 sm:p-4 border border-purple-500/10 hover:border-purple-500/30 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:shadow-purple-500/20">
-                                    <img src="assets/Adobe_Media_Encoder_Icon.svg" alt="Adobe Media Encoder" class="w-12 sm:w-16 h-12 sm:h-16 mx-auto mb-2 group-hover:scale-110 transition-transform" loading="lazy">
-                                    <span class="block text-center text-xs sm:text-sm text-gray-300 group-hover:text-purple-400">Media Encoder</span>
+                                <div class="relative bg-black/40 backdrop-blur-sm rounded-xl p-4 border border-purple-500/10 hover:border-purple-500/30 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-lg hover:shadow-purple-500/20">
+                                    <img src="assets/Adobe_Media_Encoder_Icon.svg" alt="Adobe Media Encoder" class="w-16 h-16 mx-auto mb-3 group-hover:scale-110 transition-transform" loading="lazy">
+                                    <span class="block text-center text-sm text-gray-300 group-hover:text-purple-400 font-medium">Media Encoder</span>
+                                    <div class="absolute inset-0 bg-gradient-to-b from-transparent to-purple-500/5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
                                 </div>
                             </div>
                         </div>
                     </article>
                 </div>
 
-                <!-- Sağ Kolon - Deneyim -->
-                <div class="about-content space-y-6">
-                    <article class="bg-black/50 backdrop-blur-md rounded-xl p-6 sm:p-8 border border-purple-500/20 hover:border-purple-500/40 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl hover:shadow-purple-500/20">
-                        <h3 class="text-xl sm:text-2xl font-semibold mb-6 text-purple-400">Deneyim</h3>
+                <!-- Sağ Kolon - Deneyim ve Başarılar -->
+                <div class="space-y-8">
+                    <!-- Deneyim -->
+                    <article class="bg-black/50 backdrop-blur-md rounded-xl p-8 border border-purple-500/20 hover:border-purple-500/40 transition-all duration-300">
+                        <div class="flex items-center mb-6">
+                            <div class="w-12 h-12 rounded-lg bg-purple-500/20 flex items-center justify-center mr-4">
+                                <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                </svg>
+                            </div>
+                            <h3 class="text-2xl font-bold text-purple-400">Deneyim ve Uzmanlık</h3>
+                        </div>
                         <ul class="space-y-6" role="list">
-                            <li class="flex items-start gap-4 group" role="listitem">
-                                <div class="flex-shrink-0">
-                                    <div class="w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center">
-                                        <svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                        </svg>
+                            <li class="experience-item group" role="listitem">
+                                <div class="flex items-start gap-4 p-4 rounded-lg bg-black/30 border border-purple-500/10 hover:border-purple-500/30 transition-all duration-300">
+                                    <div class="flex-shrink-0">
+                                        <div class="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center">
+                                            <svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                            </svg>
+                                        </div>
                                     </div>
-                                </div>
-                                <div>
-                                    <h4 class="text-lg font-medium text-purple-400 group-hover:text-purple-300 transition-colors">Profesyonel Video Editörü</h4>
-                                    <p class="text-sm text-gray-400 mt-1">5+ yıl deneyim</p>
+                                    <div>
+                                        <h4 class="text-lg font-semibold text-purple-400 mb-1">Video Prodüksiyon</h4>
+                                        <p class="text-gray-300">Reklam, tanıtım ve sosyal medya içerikleri için profesyonel video prodüksiyon hizmetleri</p>
+                                        <p class="text-sm text-purple-400/70 mt-2">4+ yıl deneyim</p>
+                                    </div>
                                 </div>
                             </li>
-                            <li class="flex items-start gap-4 group" role="listitem">
-                                <div class="flex-shrink-0">
-                                    <div class="w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center">
-                                        <svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                                        </svg>
+                            <li class="experience-item group" role="listitem">
+                                <div class="flex items-start gap-4 p-4 rounded-lg bg-black/30 border border-purple-500/10 hover:border-purple-500/30 transition-all duration-300">
+                                    <div class="flex-shrink-0">
+                                        <div class="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center">
+                                            <svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z" />
+                                            </svg>
+                                        </div>
                                     </div>
-                                </div>
-                                <div>
-                                    <h4 class="text-lg font-medium text-purple-400 group-hover:text-purple-300 transition-colors">100+ Başarılı Proje</h4>
-                                    <p class="text-sm text-gray-400 mt-1">Çeşitli sektörlerden müşteriler</p>
+                                    <div>
+                                        <h4 class="text-lg font-semibold text-purple-400 mb-1">Post-Prodüksiyon</h4>
+                                        <p class="text-gray-300">Profesyonel video düzenleme, renk düzeltme ve görsel efekt uygulamaları</p>
+                                        <p class="text-sm text-purple-400/70 mt-2">100+ tamamlanmış proje</p>
+                                    </div>
                                 </div>
                             </li>
                         </ul>
+                    </article>
+
+                    <!-- İstatistikler -->
+                    <article class="bg-black/50 backdrop-blur-md rounded-xl p-8 border border-purple-500/20 hover:border-purple-500/40 transition-all duration-300">
+                        <div class="grid grid-cols-2 gap-6">
+                            <div class="text-center p-4 rounded-lg bg-black/30 border border-purple-500/10">
+                                <div class="text-3xl font-bold text-purple-400 mb-2">100+</div>
+                                <div class="text-gray-300">Tamamlanan Proje</div>
+                            </div>
+                            <div class="text-center p-4 rounded-lg bg-black/30 border border-purple-500/10">
+                                <div class="text-3xl font-bold text-purple-400 mb-2">4+</div>
+                                <div class="text-gray-300">Yıl Deneyim</div>
+                            </div>
+                        </div>
                     </article>
                 </div>
             </div>
@@ -185,61 +231,68 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="min-h-screen bg-gradient-to-b from-black via-purple-900/10 to-black py-20 px-4 sm:px-6">
-        <div class="container mx-auto max-w-6xl">
-            <h2 class="text-3xl sm:text-4xl font-bold text-center mb-12 neon-title">İletişim</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="contact-info space-y-6">
-                    <div class="bg-black/50 backdrop-blur-md rounded-xl p-6 sm:p-8 border border-purple-500/20">
-                        <h3 class="text-xl sm:text-2xl font-semibold mb-6 text-purple-400">İletişim Bilgileri</h3>
-                        <div class="space-y-4">
-                            <div class="flex items-center gap-4">
-                                <div class="w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center flex-shrink-0">
-                                    <svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                                    </svg>
-                                </div>
-                                <div>
-                                    <p class="text-sm text-gray-400">E-posta</p>
-                                    <a href="mailto:metehanhacer2@gmail.com" class="text-purple-400 hover:text-purple-300 transition-colors">metehanhacer2@gmail.com</a>
-                                </div>
-                            </div>
-                            <div class="flex items-center gap-4">
-                                <div class="w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center flex-shrink-0">
-                                    <svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
-                                    </svg>
-                                </div>
-                                <div>
-                                    <p class="text-sm text-gray-400">Telefon</p>
-                                    <a href="tel:+905384364303" class="text-purple-400 hover:text-purple-300 transition-colors">+90 538 436 43 03</a>
-                                </div>
-                            </div>
+    <section id="contact" class="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-purple-900/30 to-black/30">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl sm:text-4xl font-bold text-center mb-16">İletişim</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div class="space-y-8">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center flex-shrink-0">
+                            <svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-400">E-posta</p>
+                            <a href="mailto:metehanhacer2@gmail.com" class="text-purple-400 hover:text-purple-300 transition-colors">metehanhacer2@gmail.com</a>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center flex-shrink-0">
+                            <svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-400">Telefon</p>
+                            <a href="tel:+905384364303" class="text-purple-400 hover:text-purple-300 transition-colors">+90 538 436 43 03</a>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center flex-shrink-0">
+                            <svg class="w-5 h-5 text-purple-400" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-400">Instagram</p>
+                            <a href="https://instagram.com/metehanpk_" target="_blank" rel="noopener noreferrer" class="text-purple-400 hover:text-purple-300 transition-colors">@metehanpk_</a>
                         </div>
                     </div>
                 </div>
-
-                <form id="contact-form" class="space-y-6 bg-black/50 backdrop-blur-md rounded-xl p-6 sm:p-8 border border-purple-500/20">
-                    <div>
-                        <label for="name" class="block text-sm font-medium text-gray-300 mb-2">İsim</label>
-                        <input type="text" id="name" name="name" required
-                            class="w-full px-4 py-2 bg-gray-900/50 border border-purple-500/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-purple-500 transition-colors">
-                    </div>
-                    <div>
-                        <label for="email" class="block text-sm font-medium text-gray-300 mb-2">E-posta</label>
-                        <input type="email" id="email" name="email" required
-                            class="w-full px-4 py-2 bg-gray-900/50 border border-purple-500/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-purple-500 transition-colors">
-                    </div>
-                    <div>
-                        <label for="message" class="block text-sm font-medium text-gray-300 mb-2">Mesaj</label>
-                        <textarea id="message" name="message" rows="4" required
-                            class="w-full px-4 py-2 bg-gray-900/50 border border-purple-500/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-purple-500 transition-colors resize-none"></textarea>
-                    </div>
-                    <button type="submit"
-                        class="w-full px-8 py-3 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg text-white font-medium hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:shadow-purple-500/20">
-                        Gönder
-                    </button>
-                </form>
+                <div>
+                    <form id="contact-form" class="space-y-6">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-300 mb-2">İsim</label>
+                            <input type="text" id="name" name="name" required
+                                class="w-full px-4 py-2 bg-gray-900/50 border border-purple-500/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-purple-500 transition-colors">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-300 mb-2">E-posta</label>
+                            <input type="email" id="email" name="email" required
+                                class="w-full px-4 py-2 bg-gray-900/50 border border-purple-500/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-purple-500 transition-colors">
+                        </div>
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-gray-300 mb-2">Mesaj</label>
+                            <textarea id="message" name="message" rows="4" required
+                                class="w-full px-4 py-2 bg-gray-900/50 border border-purple-500/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-purple-500 transition-colors resize-none"></textarea>
+                        </div>
+                        <button type="submit"
+                            class="w-full px-8 py-3 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg text-white font-medium hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:shadow-purple-500/20">
+                            Gönder
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
     </section>

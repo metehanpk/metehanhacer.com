@@ -112,6 +112,8 @@ function initializeAnimations() {
             });
         }
     }
+
+    initializeContactAnimations();
 }
 
 // About Section Animations
@@ -119,57 +121,211 @@ function initializeAboutAnimations() {
     const aboutSection = document.querySelector('#about');
     if (!aboutSection) return;
 
-    // Performans için animasyonları batch halinde çalıştır
-    const tl = gsap.timeline({
+    // Ana başlık ve intro animasyonu
+    const introTl = gsap.timeline({
         scrollTrigger: {
             trigger: '#about',
             start: 'top bottom-=100',
+            end: 'center center',
+            toggleActions: 'play none none reverse'
+        }
+    });
+
+    introTl
+        .from('#about-heading', {
+            y: 30,
+            opacity: 0,
+            duration: 0.8,
+            ease: 'power2.out'
+        })
+        .from('#about p', {
+            y: 20,
+            opacity: 0,
+            duration: 0.6,
+            ease: 'power2.out'
+        }, '-=0.4');
+
+    // Sol kolon animasyonları
+    const leftColTl = gsap.timeline({
+        scrollTrigger: {
+            trigger: '.about-content:first-child',
+            start: 'top bottom-=50',
             end: 'bottom center',
             toggleActions: 'play none none reverse'
         }
     });
 
-    // Ana başlık animasyonu
-    tl.from('#about-heading', {
+    leftColTl
+        .from('.about-content:first-child article', {
+            x: -50,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.2,
+            ease: 'power2.out'
+        })
+        .from('.software-item', {
+            y: 30,
+            opacity: 0,
+            duration: 0.6,
+            stagger: 0.1,
+            ease: 'back.out(1.2)'
+        }, '-=0.4');
+
+    // Sağ kolon animasyonları
+    const rightColTl = gsap.timeline({
+        scrollTrigger: {
+            trigger: '.about-content:last-child',
+            start: 'top bottom-=50',
+            end: 'bottom center',
+            toggleActions: 'play none none reverse'
+        }
+    });
+
+    rightColTl
+        .from('.experience-item', {
+            x: 50,
+            opacity: 0,
+            duration: 0.6,
+            stagger: 0.2,
+            ease: 'power2.out'
+        })
+        .from('.about-content:last-child article:last-child', {
+            y: 30,
+            opacity: 0,
+            duration: 0.6,
+            ease: 'power2.out'
+        }, '-=0.2');
+
+    // Hover efektleri
+    const softwareItems = document.querySelectorAll('.software-item');
+    softwareItems.forEach(item => {
+        item.addEventListener('mouseenter', () => {
+            gsap.to(item.querySelector('img'), {
+                scale: 1.1,
+                duration: 0.3,
+                ease: 'power2.out'
+            });
+        });
+
+        item.addEventListener('mouseleave', () => {
+            gsap.to(item.querySelector('img'), {
+                scale: 1,
+                duration: 0.3,
+                ease: 'power2.out'
+            });
+        });
+    });
+
+    // ScrollTrigger yenileme
+    ScrollTrigger.refresh();
+}
+
+// Contact Section Animations
+function initializeContactAnimations() {
+    const contactSection = document.querySelector('#contact');
+    if (!contactSection) return;
+
+    // Contact heading animation
+    gsap.from('#contact h2', {
+        scrollTrigger: {
+            trigger: '#contact h2',
+            start: 'top bottom-=100',
+            end: 'bottom center',
+            toggleActions: 'play none none reverse'
+        },
         y: 30,
         opacity: 0,
         duration: 0.8,
         ease: 'power2.out'
     });
 
-    // Sol ve sağ kolonlar için animasyon
-    const columns = aboutSection.querySelectorAll('.about-content');
-    columns.forEach((column, index) => {
-        tl.from(column, {
-            x: index === 0 ? -50 : 50,
-            opacity: 0,
-            duration: 0.8,
-            ease: 'power2.out'
-        }, '-=0.4');
+    // Contact info animations
+    const contactInfoTl = gsap.timeline({
+        scrollTrigger: {
+            trigger: '.contact-info',
+            start: 'top bottom-=50',
+            end: 'bottom center',
+            toggleActions: 'play none none reverse'
+        }
     });
 
-    // Yazılım ikonları için stagger animasyon
-    const softwareItems = aboutSection.querySelectorAll('.software-item');
-    tl.from(softwareItems, {
-        y: 30,
-        opacity: 0,
-        duration: 0.6,
-        stagger: 0.15,
-        ease: 'back.out(1.2)'
-    }, '-=0.2');
+    contactInfoTl
+        .from('.contact-info > div', {
+            y: 50,
+            opacity: 0,
+            duration: 0.6,
+            ease: 'power2.out'
+        })
+        .from('.contact-info .flex', {
+            x: -30,
+            opacity: 0,
+            duration: 0.4,
+            stagger: 0.2,
+            ease: 'power2.out'
+        }, '-=0.2');
 
-    // Deneyim maddeleri için stagger animasyon
-    const experienceItems = aboutSection.querySelectorAll('.about-content:last-child li');
-    tl.from(experienceItems, {
-        x: 30,
-        opacity: 0,
-        duration: 0.6,
-        stagger: 0.15,
-        ease: 'power2.out'
-    }, '-=0.2');
+    // Form animations
+    const formTl = gsap.timeline({
+        scrollTrigger: {
+            trigger: '#contact-form',
+            start: 'top bottom-=50',
+            end: 'bottom center',
+            toggleActions: 'play none none reverse'
+        }
+    });
 
-    // Scroll trigger yenileme için observer ekle
-    ScrollTrigger.refresh();
+    formTl
+        .from('#contact-form', {
+            y: 50,
+            opacity: 0,
+            duration: 0.6,
+            ease: 'power2.out'
+        })
+        .from('#contact-form > div', {
+            y: 20,
+            opacity: 0,
+            duration: 0.4,
+            stagger: 0.1,
+            ease: 'power2.out'
+        }, '-=0.2');
+
+    // Form interaction animations
+    const formInputs = document.querySelectorAll('#contact-form input, #contact-form textarea');
+    formInputs.forEach(input => {
+        input.addEventListener('focus', () => {
+            gsap.to(input, {
+                scale: 1.02,
+                duration: 0.3,
+                ease: 'power2.out'
+            });
+        });
+
+        input.addEventListener('blur', () => {
+            gsap.to(input, {
+                scale: 1,
+                duration: 0.3,
+                ease: 'power2.out'
+            });
+        });
+    });
+
+    // Form submit animation
+    const form = document.getElementById('contact-form');
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        gsap.to(form, {
+            scale: 0.98,
+            duration: 0.2,
+            ease: 'power2.out',
+            yoyo: true,
+            repeat: 1,
+            onComplete: () => {
+                // Form submit işlemleri burada yapılabilir
+                form.reset();
+            }
+        });
+    });
 }
 
 // Portfolio items data
@@ -259,23 +415,7 @@ function initializePortfolio() {
 
     // Create and append portfolio items
     portfolioItems.forEach(item => {
-        const portfolioItem = document.createElement('div');
-        portfolioItem.className = 'portfolio-item relative group overflow-hidden rounded-lg shadow-xl';
-        portfolioItem.innerHTML = `
-            <div class="relative aspect-video overflow-hidden bg-gray-900">
-                <video src="${item.videoSrc}" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" muted loop></video>
-                <div class="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                    <button class="play-button bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-full transform -translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 border border-purple-500/30 hover:border-purple-500 shadow-purple-strong">
-                        İzle
-                    </button>
-                </div>
-            </div>
-            <div class="p-4">
-                <h3 class="text-xl font-semibold mb-2">${item.title}</h3>
-                <p class="text-gray-400">${item.description}</p>
-                <span class="inline-block mt-2 text-sm font-medium text-purple-400">${item.type}</span>
-            </div>
-        `;
+        const portfolioItem = createPortfolioItem(item);
         portfolioGrid.appendChild(portfolioItem);
     });
 
@@ -303,45 +443,224 @@ function initializePortfolio() {
     });
 }
 
-// Video modal functionality
-function showVideoModal({ title, video }) {
-    const modal = document.createElement('div');
-    modal.className = 'fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-90 transition-opacity duration-300';
-    modal.innerHTML = `
-        <div class="relative w-full max-w-4xl mx-auto bg-gray-900 rounded-lg shadow-2xl overflow-hidden">
-            <div class="flex justify-between items-center p-4 border-b border-gray-800">
-                <h3 class="text-xl font-semibold text-white">${title}</h3>
-                <button class="close-modal text-gray-400 hover:text-white transition-colors">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                    </svg>
-                </button>
-            </div>
-            <div class="relative aspect-video">
-                <video src="${video}" class="w-full h-full object-contain" controls autoplay></video>
-            </div>
-        </div>
+function createPortfolioItem(item) {
+    const portfolioItem = document.createElement('div');
+    portfolioItem.className = 'group relative overflow-hidden rounded-xl bg-purple-950/30 transition-all duration-300 hover:bg-purple-950/40';
+    
+    const imageContainer = document.createElement('div');
+    imageContainer.className = 'aspect-[16/12] overflow-hidden relative';
+    
+    // Video önizleme
+    const previewVideo = document.createElement('video');
+    previewVideo.src = item.videoSrc;
+    previewVideo.className = 'h-full w-full object-cover transition-all duration-300 group-hover:scale-105 group-hover:blur-sm';
+    previewVideo.muted = true;
+    previewVideo.loop = true;
+    previewVideo.playsInline = true;
+
+    // Thumbnail image (fallback ve ilk yükleme için)
+    const thumbnailImg = document.createElement('img');
+    thumbnailImg.src = item.imageSrc;
+    thumbnailImg.className = 'absolute inset-0 w-full h-full object-cover transition-opacity duration-300';
+    thumbnailImg.alt = item.title;
+    
+    // Hover overlay
+    const overlay = document.createElement('div');
+    overlay.className = 'absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center';
+    
+    const playButton = document.createElement('button');
+    playButton.className = 'play-button bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-full transform -translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 border border-purple-500/30 hover:border-purple-500 shadow-purple-strong flex items-center gap-2';
+    playButton.innerHTML = `
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        İzle
     `;
+    
+    overlay.appendChild(playButton);
+    imageContainer.appendChild(thumbnailImg);
+    imageContainer.appendChild(previewVideo);
+    imageContainer.appendChild(overlay);
+    portfolioItem.appendChild(imageContainer);
+    
+    const content = document.createElement('div');
+    content.className = 'p-4';
+    content.innerHTML = `
+        <h3 class="text-lg font-semibold text-white">${item.title}</h3>
+        <p class="text-sm text-gray-400">${item.description}</p>
+        <span class="inline-block mt-2 text-xs text-purple-400">${item.type}</span>
+    `;
+    
+    portfolioItem.appendChild(content);
 
-    // Close modal events
-    const closeModal = () => {
-        modal.classList.add('opacity-0');
-        setTimeout(() => modal.remove(), 300);
-    };
-
-    modal.querySelector('.close-modal').addEventListener('click', closeModal);
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) closeModal();
+    // Hover olayları
+    portfolioItem.addEventListener('mouseenter', () => {
+        thumbnailImg.style.opacity = '0';
+        previewVideo.play().catch(() => {});
     });
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') closeModal();
+
+    portfolioItem.addEventListener('mouseleave', () => {
+        thumbnailImg.style.opacity = '1';
+        previewVideo.pause();
+        previewVideo.currentTime = 0;
     });
 
-    // Add modal to body
-    document.body.appendChild(modal);
-    // Trigger reflow for animation
-    modal.offsetHeight;
-    modal.classList.remove('opacity-0');
+    // Modal açma olayı
+    playButton.addEventListener('click', () => {
+        showVideoModal(item);
+    });
+    
+    return portfolioItem;
+}
+
+// Video modal fonksiyonu
+function showVideoModal(item) {
+    const modal = document.createElement('div');
+    modal.className = 'fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/95 opacity-0 transition-all duration-300 backdrop-blur-sm';
+
+    function checkVideoOrientation(video) {
+        return new Promise((resolve) => {
+            video.onloadedmetadata = () => {
+                const isVertical = video.videoHeight > video.videoWidth;
+                resolve(isVertical);
+            };
+            if (video.readyState >= 2) {
+                const isVertical = video.videoHeight > video.videoWidth;
+                resolve(isVertical);
+            }
+        });
+    }
+
+    const testVideo = document.createElement('video');
+    testVideo.src = item.videoSrc;
+    
+    checkVideoOrientation(testVideo).then(isVertical => {
+        const modalContent = document.createElement('div');
+        modalContent.className = `
+            relative bg-gradient-to-br from-purple-950/90 to-black/90 
+            rounded-2xl p-4 sm:p-6 w-full transform scale-95 transition-all duration-300 
+            shadow-2xl shadow-purple-900/20 border border-purple-500/10
+            mx-4 sm:mx-6
+        `;
+        
+        // Responsive modal genişlikleri
+        if (isVertical) {
+            modalContent.style.maxWidth = window.innerWidth < 640 ? '100%' : '500px';
+        } else {
+            modalContent.style.maxWidth = window.innerWidth < 640 ? '100%' : '1200px';
+        }
+
+        // Header bölümü
+        const header = document.createElement('div');
+        header.className = 'flex items-center justify-between mb-4';
+        
+        const titleContainer = document.createElement('div');
+        titleContainer.className = 'flex items-center gap-2 sm:gap-3';
+        
+        const playIcon = document.createElement('div');
+        playIcon.className = 'w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-purple-500/20 flex items-center justify-center';
+        playIcon.innerHTML = `
+            <svg class="w-3 h-3 sm:w-4 sm:h-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                    d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+            </svg>
+        `;
+
+        const title = document.createElement('h3');
+        title.className = 'text-base sm:text-xl font-semibold text-white/90 truncate';
+        title.textContent = item.title;
+        
+        titleContainer.appendChild(playIcon);
+        titleContainer.appendChild(title);
+
+        const closeButton = document.createElement('button');
+        closeButton.className = `
+            text-white/70 hover:text-white transition-colors
+            w-8 h-8 rounded-full hover:bg-white/10 flex items-center justify-center
+        `;
+        closeButton.innerHTML = `
+            <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        `;
+
+        header.appendChild(titleContainer);
+        header.appendChild(closeButton);
+        
+        // Video container
+        const videoContainer = document.createElement('div');
+        videoContainer.className = `
+            ${isVertical ? 'aspect-[9/16]' : 'aspect-video'}
+            relative rounded-xl overflow-hidden bg-black/50
+            ring-1 ring-white/10 shadow-lg
+        `;
+        
+        const video = document.createElement('video');
+        video.src = item.videoSrc;
+        video.className = 'w-full h-full object-contain';
+        video.controls = true;
+        video.autoplay = true;
+        video.playsInline = true; // Mobil cihazlar için önemli
+
+        // Footer bölümü - Mobilde gizlenebilir
+        const footer = document.createElement('div');
+        footer.className = 'mt-4 text-xs sm:text-sm text-white/50 hidden sm:block';
+        footer.textContent = item.description || '';
+        
+        videoContainer.appendChild(video);
+        modalContent.appendChild(header);
+        modalContent.appendChild(videoContainer);
+        modalContent.appendChild(footer);
+        modal.appendChild(modalContent);
+        document.body.appendChild(modal);
+
+        // Touch olayları için kaydırma engellemesi
+        document.body.style.overflow = 'hidden';
+
+        // Animasyonlar
+        requestAnimationFrame(() => {
+            modal.style.opacity = '1';
+            modalContent.style.transform = 'scale(1)';
+            modalContent.style.opacity = '1';
+        });
+        
+        function closeModal(immediate = false) {
+            document.body.style.overflow = ''; // Kaydırmayı geri aç
+            modal.style.opacity = '0';
+            modalContent.style.transform = 'scale(95%)';
+            modalContent.style.opacity = '0';
+            
+            const delay = immediate ? 0 : 300;
+            setTimeout(() => {
+                document.body.removeChild(modal);
+                video.pause();
+            }, delay);
+        }
+        
+        closeButton.addEventListener('click', () => closeModal());
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+        
+        // Touch olayları için
+        modal.addEventListener('touchstart', (e) => {
+            if (e.target === modal) closeModal();
+        });
+        
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        // Ekran yönü değiştiğinde modal boyutunu güncelle
+        window.addEventListener('resize', () => {
+            if (isVertical) {
+                modalContent.style.maxWidth = window.innerWidth < 640 ? '100%' : '500px';
+            } else {
+                modalContent.style.maxWidth = window.innerWidth < 640 ? '100%' : '1200px';
+            }
+        });
+    });
 }
 
 // Contact Form Handling
