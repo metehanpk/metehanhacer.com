@@ -166,28 +166,32 @@ document.addEventListener('DOMContentLoaded', () => {
     gsap.from('#about', {
         scrollTrigger: {
             trigger: '#about',
-            start: 'top center+=100',
+            start: 'top bottom',
+            end: 'top center',
+            scrub: 1,
             toggleActions: 'play none none reverse'
         },
         opacity: 0,
-        y: 50,
-        duration: 1
+        y: 100,
+        duration: 1.5
     });
 
     // İletişim bölümü animasyonu
     gsap.from('#contact', {
         scrollTrigger: {
             trigger: '#contact',
-            start: 'top center+=100',
+            start: 'top bottom',
+            end: 'top center',
+            scrub: 1,
             toggleActions: 'play none none reverse'
         },
         opacity: 0,
-        y: 50,
-        duration: 1
+        y: 100,
+        duration: 1.5
     });
 
     // Menü linklerini ayarla
-    document.querySelectorAll('.nav-link').forEach(link => {
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
             const targetId = link.getAttribute('href');
@@ -216,8 +220,9 @@ document.addEventListener('DOMContentLoaded', () => {
         
         ScrollTrigger.create({
             trigger: counter,
-            start: 'top center+=100',
-            onEnter: updateCounter
+            start: 'top bottom',
+            onEnter: updateCounter,
+            once: true
         });
     });
 });
