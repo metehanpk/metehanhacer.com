@@ -1,2 +1,2 @@
-assets/*.mp4
+# Ignore GIF files
 assets/*.gif
