@@ -152,8 +152,8 @@ function initializeAnimations() {
 const isGitHubPages = window.location.hostname.includes('github.io');
 const baseUrl = isGitHubPages ? '/metehanhacer.com' : '';
 
-// SVG logolarını ayarla
-document.addEventListener('DOMContentLoaded', () => {
+// Sayfa yüklendiğinde çalışacak kodlar
+window.addEventListener('load', () => {
     // Logo yollarını ayarla
     document.getElementById('premiere-logo').src = `${baseUrl}/assets/adobe-premiere-pro-logo.svg`;
     document.getElementById('aftereffects-logo').src = `${baseUrl}/assets/after-effects-1.svg`;
@@ -169,7 +169,8 @@ document.addEventListener('DOMContentLoaded', () => {
             start: 'top bottom',
             end: 'top center',
             scrub: 1,
-            toggleActions: 'play none none reverse'
+            toggleActions: 'play none none reverse',
+            markers: true // Debug için
         },
         opacity: 0,
         y: 100,
@@ -183,7 +184,8 @@ document.addEventListener('DOMContentLoaded', () => {
             start: 'top bottom',
             end: 'top center',
             scrub: 1,
-            toggleActions: 'play none none reverse'
+            toggleActions: 'play none none reverse',
+            markers: true // Debug için
         },
         opacity: 0,
         y: 100,
@@ -222,7 +224,8 @@ document.addEventListener('DOMContentLoaded', () => {
             trigger: counter,
             start: 'top bottom',
             onEnter: updateCounter,
-            once: true
+            once: true,
+            markers: true // Debug için
         });
     });
 });
