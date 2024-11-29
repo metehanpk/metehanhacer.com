@@ -1,19 +1,19 @@
 const CACHE_NAME = 'metehanhacer-cache-v1';
 const urlsToCache = [
-    './',
-    './index.html',
-    './main.js',
-    './styles.css',
-    './assets/zula_compressed.mp4',
-    './assets/corporate_compressed.mp4',
-    './assets/yeni_klip_compressed.mp4',
-    './assets/halloween_compressed.mp4',
-    './assets/son_deneme_compressed.mp4',
-    './assets/sirk_compressed.mp4',
-    './assets/4_compressed.mp4',
-    './assets/3_compressed.mp4',
-    './assets/comp_1_compressed.mp4',
-    './assets/alevli_adidas_compressed.mp4'
+    '/metehanhacer.com/',
+    '/metehanhacer.com/index.html',
+    '/metehanhacer.com/main.js',
+    '/metehanhacer.com/styles.css',
+    '/metehanhacer.com/assets/zula_compressed.mp4',
+    '/metehanhacer.com/assets/corporate_compressed.mp4',
+    '/metehanhacer.com/assets/yeni_klip_compressed.mp4',
+    '/metehanhacer.com/assets/halloween_compressed.mp4',
+    '/metehanhacer.com/assets/son_deneme_compressed.mp4',
+    '/metehanhacer.com/assets/sirk_compressed.mp4',
+    '/metehanhacer.com/assets/4_compressed.mp4',
+    '/metehanhacer.com/assets/3_compressed.mp4',
+    '/metehanhacer.com/assets/comp_1_compressed.mp4',
+    '/metehanhacer.com/assets/alevli_adidas_compressed.mp4'
 ];
 
 // Video uzantılarını tanımla

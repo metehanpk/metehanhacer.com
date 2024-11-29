@@ -207,12 +207,13 @@
         // Service Worker Registration
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./sw.js')
+                const swPath = '/metehanhacer.com/sw.js';
+                navigator.serviceWorker.register(swPath)
                     .then(registration => {
                         console.log('ServiceWorker registration successful');
                     })
                     .catch(err => {
-                        console.log('ServiceWorker registration failed: ', err);
+                        console.log('ServiceWorker kaydı başarısız:', err);
                     });
             });
         }
