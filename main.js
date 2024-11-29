@@ -588,6 +588,94 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }, 35);
 
+    // Mobile Menu
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mainNav = document.getElementById('main-nav');
+    const menuIcon = document.getElementById('menu-icon');
+
+    if (mobileMenuButton && mainNav) {
+        mobileMenuButton.addEventListener('click', () => {
+            const isOpen = mainNav.classList.contains('translate-x-0');
+            if (isOpen) {
+                mainNav.classList.remove('translate-x-0');
+                mainNav.classList.add('translate-x-full');
+                menuIcon.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
+            } else {
+                mainNav.classList.remove('translate-x-full');
+                mainNav.classList.add('translate-x-0');
+                menuIcon.setAttribute('d', 'M6 18L18 6M6 6l12 12');
+            }
+        });
+
+        // Menü linklerine tıklandığında menüyü kapat
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth < 1024) { // lg breakpoint
+                    mainNav.classList.remove('translate-x-0');
+                    mainNav.classList.add('translate-x-full');
+                    menuIcon.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
+                }
+            });
+        });
+    }
+
+    // Responsive video kontrolleri
+    function adjustVideoSize() {
+        const videos = document.querySelectorAll('video');
+        videos.forEach(video => {
+            if (window.innerWidth < 768) { // md breakpoint
+                video.setAttribute('playsinline', '');
+                video.setAttribute('preload', 'metadata');
+            }
+        });
+    }
+
+    // Sayfa yüklendiğinde ve pencere boyutu değiştiğinde video boyutlarını ayarla
+    window.addEventListener('load', adjustVideoSize);
+    window.addEventListener('resize', adjustVideoSize);
+
+    // Portfolio grid düzeni için responsive ayarlar
+    function adjustPortfolioGrid() {
+        const portfolioGrid = document.querySelector('.portfolio-grid');
+        if (portfolioGrid) {
+            if (window.innerWidth < 640) { // sm breakpoint
+                portfolioGrid.style.gridTemplateColumns = '1fr';
+            } else if (window.innerWidth < 1024) { // lg breakpoint
+                portfolioGrid.style.gridTemplateColumns = 'repeat(2, 1fr)';
+            } else {
+                portfolioGrid.style.gridTemplateColumns = 'repeat(3, 1fr)';
+            }
+        }
+    }
+
+    // Sayfa yüklendiğinde ve pencere boyutu değiştiğinde grid düzenini ayarla
+    window.addEventListener('load', adjustPortfolioGrid);
+    window.addEventListener('resize', adjustPortfolioGrid);
+
+    // Lazy loading için IntersectionObserver
+    if ('IntersectionObserver' in window) {
+        const videoObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const video = entry.target;
+                    if (video.dataset.src) {
+                        video.src = video.dataset.src;
+                        video.removeAttribute('data-src');
+                    }
+                    videoObserver.unobserve(video);
+                }
+            });
+        }, {
+            rootMargin: '50px 0px',
+            threshold: 0.1
+        });
+
+        // Tüm videoları gözlemle
+        document.querySelectorAll('video[data-src]').forEach(video => {
+            videoObserver.observe(video);
+        });
+    }
+
     // Mouse follower implementation
     // Mouse cursor elements
     const cursor = document.createElement('div');

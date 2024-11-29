@@ -2,8 +2,16 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Metehan HACER - Profesyonel Video Editör. 4 yıllık deneyimle yaratıcı video editing hizmetleri.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Metehan HACER - Video Editör & Motion Designer Portfolyo">
+    <meta name="theme-color" content="#000000">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!-- Önbellek kontrolü -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <meta name="author" content="Metehan HACER">
     <meta name="keywords" content="video editör, profesyonel video düzenleme, video editing, after effects, premiere pro, video prodüksiyon">
     <meta name="robots" content="index, follow">
@@ -93,8 +101,21 @@
         <div class="relative z-10">
             <div class="container mx-auto px-4">
                 <h2 class="text-4xl font-bold text-center mb-12 text-white">Çalışmalarım</h2>
-                <div id="portfolio-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Portfolio items will be dynamically added here -->
+                <div class="portfolio-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
+                    <template id="portfolio-item-template">
+                        <div class="portfolio-item group relative overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:scale-105">
+                            <div class="aspect-w-16 aspect-h-9">
+                                <img class="thumbnail w-full h-full object-cover" src="" alt="">
+                                <video class="video hidden w-full h-full object-cover" loop muted playsinline preload="metadata">
+                                    <source src="" type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center text-white p-4">
+                                <h3 class="text-xl md:text-2xl font-bold mb-2 text-center"></h3>
+                                <p class="text-sm md:text-base text-center"></p>
+                            </div>
+                        </div>
+                    </template>
                 </div>
             </div>
         </div>
