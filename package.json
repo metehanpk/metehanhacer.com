@@ -1,0 +1,12 @@
+{
+  "name": "metehan-hacer-portfolio",
+  "version": "1.0.0",
+  "description": "Metehan Hacer Portfolio Website",
+  "scripts": {
+    "dev": "npx tailwindcss -i ./src/input.css -o ./style.css --watch",
+    "build": "npx tailwindcss -i ./src/input.css -o ./style.css --minify"
+  },
+  "dependencies": {
+    "tailwindcss": "^3.3.3"
+  }
+}
