@@ -152,6 +152,14 @@ function initializeAnimations() {
 const isGitHubPages = window.location.hostname.includes('github.io');
 const baseUrl = isGitHubPages ? '/metehanhacer.com' : '';
 
+// SVG logolarını ayarla
+document.addEventListener('DOMContentLoaded', () => {
+    // Logo yollarını ayarla
+    document.getElementById('premiere-logo').src = `${baseUrl}/assets/adobe-premiere-pro-logo.svg`;
+    document.getElementById('aftereffects-logo').src = `${baseUrl}/assets/after-effects-1.svg`;
+    document.getElementById('mediaencoder-logo').src = `${baseUrl}/assets/Adobe_Media_Encoder_Icon.svg`;
+});
+
 // Portfolio items data
 const portfolioItems = [
     {
