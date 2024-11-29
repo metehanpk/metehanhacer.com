@@ -1,16 +1,11 @@
 const CACHE_NAME = 'mh-portfolio-v2';
 const ASSETS_TO_CACHE = [
-  '/',
-  '/index.html',
-  '/style.css',
-  '/main.js',
-  '/background.js',
-  '/effects.js',
-  '/navigation.js',
-  '/transitions.js',
-  '/particles-config.js',
-  '/favicon.svg',
-  '/toast.js'
+  './',
+  './index.html',
+  './style.css',
+  './main.js',
+  './toast.js',
+  './favicon.svg'
 ];
 
 // Video uzantılarını tanımla

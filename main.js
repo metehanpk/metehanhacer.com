@@ -83,6 +83,48 @@ class LoaderAnimation {
     }
 }
 
+// Scroll animations
+function initScrollAnimations() {
+    // Portfolio items animation
+    gsap.utils.toArray('.portfolio-item').forEach((item, index) => {
+        gsap.from(item, {
+            scrollTrigger: {
+                trigger: item,
+                start: 'top bottom-=100',
+                toggleActions: 'play none none reverse'
+            },
+            opacity: 0,
+            y: 50,
+            duration: 0.8,
+            delay: index * 0.1
+        });
+    });
+
+    // About section animation
+    gsap.from('#about', {
+        scrollTrigger: {
+            trigger: '#about',
+            start: 'top center+=100',
+            toggleActions: 'play none none reverse'
+        },
+        opacity: 0,
+        y: 50,
+        duration: 1
+    });
+
+    // Contact section animation
+    gsap.from('#contact', {
+        scrollTrigger: {
+            trigger: '#contact',
+            start: 'top center+=100',
+            toggleActions: 'play none none reverse'
+        },
+        opacity: 0,
+        y: 50,
+        duration: 1
+    });
+}
+
 // Start loader when page loads
 window.addEventListener('load', () => {
     const loader = new LoaderAnimation();
@@ -112,70 +154,70 @@ const portfolioItems = [
         title: 'Oyun Editi Örneği',
         description: 'Zula oyun montajı',
         thumbnail: 'assets/zula.jpg',
-        video: 'https://res.cloudinary.com/drhgvt8rz/video/upload/v1/metehanhacer/zula',
+        video: 'assets/zula_compressed.mp4',
         type: 'game'
     },
     {
         title: 'Tekstil Reklamı',
         description: 'Kurumsal tanıtım',
         thumbnail: 'assets/corporate.jpg',
-        video: 'https://res.cloudinary.com/drhgvt8rz/video/upload/v1/metehanhacer/corporate',
+        video: 'assets/corporate_compressed.mp4',
         type: 'corporate'
     },
     {
         title: 'Emlak Reklamı',
         description: 'Emlak tanıtım',
         thumbnail: 'assets/yeni-klip.jpg',
-        video: 'https://res.cloudinary.com/drhgvt8rz/video/upload/v1/metehanhacer/yeni-klip',
+        video: 'assets/yeni_klip_compressed.mp4',
         type: 'estate'
     },
     {
         title: 'Halloween',
         description: 'Cadılar bayramında eğlenceli anlar',
         thumbnail: 'assets/Ekran görüntüsü 2024-11-26 075159.png',
-        video: 'https://res.cloudinary.com/drhgvt8rz/video/upload/v1/metehanhacer/halloween',
+        video: 'assets/halloween_compressed.mp4',
         type: 'game'
     },
     {
         title: 'İçecek Hazırlama',
         description: 'İçecek hazırlama videosu',
         thumbnail: 'assets/Ekran görüntüsü 2024-11-26 195713.png',
-        video: 'https://res.cloudinary.com/drhgvt8rz/video/upload/v1/metehanhacer/son-deneme',
+        video: 'assets/son_deneme_compressed.mp4',
         type: 'special'
     },
     {
         title: 'Sirk Videosu',
         description: 'Kurumsal tanıtım',
         thumbnail: 'assets/Ekran görüntüsü 2024-11-26 193557.png',
-        video: 'https://res.cloudinary.com/drhgvt8rz/video/upload/v1/metehanhacer/sirk',
+        video: 'assets/sirk_compressed.mp4',
         type: 'corporate'
     },
     {
         title: 'Oyun Editi Örneği 2',
         description: 'Zula oyun montajı',
         thumbnail: 'assets/Ekran görüntüsü 2024-11-26 063458.png',
-        video: 'https://res.cloudinary.com/drhgvt8rz/video/upload/v1/metehanhacer/4',
+        video: 'assets/4_compressed.mp4',
         type: 'game'
     },
     {
         title: 'Tekstil Reklamı 2',
         description: 'Kurumsal Tanıtım',
         thumbnail: 'assets/Ekran görüntüsü 2024-11-26 235137.png',
-        video: 'https://res.cloudinary.com/drhgvt8rz/video/upload/v1/metehanhacer/3',
+        video: 'assets/3_compressed.mp4',
         type: 'special'
     },
     {
         title: 'Sosyal Medya İçin Mizah İçerikleri',
         description: '',
         thumbnail: 'assets/Ekran görüntüsü 2024-11-27 013848.png',
-        video: 'https://res.cloudinary.com/drhgvt8rz/video/upload/v1/metehanhacer/comp-1',
+        video: 'assets/comp_1_compressed.mp4',
         type: 'center'
     },
     {
         title: 'Logo Animasyonu Örneği',
         description: 'Animasyon Çalışmalarım',
         thumbnail: 'assets/Ekran görüntüsü 2024-11-28 201449.png',
-        video: 'https://res.cloudinary.com/drhgvt8rz/video/upload/v1/metehanhacer/alevli-adidas',
+        video: 'assets/alevli_adidas_compressed.mp4',
         type: 'center-main'
     }
 ];
@@ -186,22 +228,31 @@ function createPortfolioItem(title, description, imageSrc, videoSrc, type = '') 
     const typeClass = `portfolio-item ${type} cursor-pointer transform transition-all duration-300 hover:scale-[1.02]`;
     const aspectRatio = type === 'corporate' ? 'aspect-[9/16]' : 'aspect-[16/9]';
     
-    // Responsive genişlik ve margin sınıfları
-    let responsiveClasses = '';
+    // Özel margin ve genişlik ayarı
+    let marginClass = '';
+    let widthClass = '';
     
     if (title === 'Oyun Editi Örneği 2') {
-        responsiveClasses = 'w-full md:w-[500px] lg:-ml-32 relative lg:-top-[22rem]';
+        marginClass = '-ml-32';
+        widthClass = 'w-[500px] relative -top-[22rem]';
     } else if (title === 'İçecek Hazırlama') {
-        responsiveClasses = 'w-full md:w-[550px] lg:-ml-[32rem]';
+        marginClass = '-ml-[32rem]';
+        widthClass = 'w-[550px]';
     } else if (title === 'Sirk Videosu') {
-        responsiveClasses = 'w-full md:w-[500px] lg:-ml-[33rem]';
+        marginClass = '-ml-[33rem]';
+        widthClass = 'w-[500px]';
+    } else if (title === 'Tekstil Reklamı 2') {
+        marginClass = 'ml-[27rem]';
+        widthClass = 'w-[570px] relative -top-[65rem]';
     } else if (title === 'Sosyal Medya İçin Mizah İçerikleri') {
-        responsiveClasses = 'w-full md:w-[570px] lg:-ml-[5rem] relative lg:-top-[44rem] z-50';
-    } else {
-        responsiveClasses = 'w-full';
+        marginClass = '-ml-[5rem]';
+        widthClass = 'w-[570px] relative -top-[44rem] z-50';
+    } else if (title === 'Logo Animasyonu Örneği') {
+        marginClass = 'ml-[59rem]';
+        widthClass = 'w-[570px] relative -top-[44.5rem] z-40';
     }
     
-    portfolioItem.className = `${typeClass} ${responsiveClasses} mb-8 overflow-hidden rounded-lg shadow-xl`;
+    portfolioItem.className = `${typeClass} ${marginClass} ${widthClass}`;
     portfolioItem.innerHTML = `
         <div class="relative ${aspectRatio} overflow-hidden rounded-2xl group shadow-lg transition-all duration-300 hover:shadow-xl">
             <img src="${imageSrc}" alt="${description}" class="w-full h-full object-cover transition-all duration-500 group-hover:scale-105 group-hover:blur-sm" style="${title === 'Tekstil Reklamı 2' ? 'object-position: center 25%;' : ''}" />
@@ -613,80 +664,62 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Optimized scroll animations
-    const initScrollAnimations = () => {
-        gsap.utils.toArray('.counter').forEach(counter => {
-            const value = parseInt(counter.textContent);
-            gsap.from(counter, {
-                textContent: 0,
-                duration: 2,
-                ease: 'power1.inOut',
-                snap: { textContent: 1 },
-                scrollTrigger: {
-                    trigger: counter,
-                    start: 'top 80%',
-                    once: true
-                }
-            });
-        });
-    };
-
-    // Form handling with validation and feedback
-    const initContactForm = () => {
-        const form = document.querySelector('#contactForm');
-        if (!form) return;
-
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
-
-            // Form validation
-            if (!name || !email || !message) {
-                alert('Lütfen tüm alanları doldurun.');
-                return;
-            }
-
-            // Email validation
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                alert('Lütfen geçerli bir e-posta adresi girin.');
-                return;
-            }
-
-            try {
-                const response = await fetch('https://formsubmit.co/ajax/metehanhacer2@gmail.com', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        name: name,
-                        email: email,
-                        message: message,
-                        _subject: 'Yeni Portfolio İletişim Formu Mesajı',
-                        _template: 'table'
-                    })
-                });
-
-                const result = await response.json();
-                
-                if (result.success) {
-                    alert('Mesajınız başarıyla gönderildi!');
-                    form.reset();
-                } else {
-                    throw new Error('Form gönderilemedi');
-                }
-            } catch (error) {
-                alert('Mesaj gönderilirken bir hata oluştu. Lütfen daha sonra tekrar deneyin.');
-                console.error('Form submission error:', error);
-            }
-        });
-    };
-
     initScrollAnimations();
     initContactForm();
 });
+
+// Form handling with validation and feedback
+function initContactForm() {
+    const form = document.querySelector('#contactForm');
+    if (!form) return;
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const message = document.getElementById('message').value;
+
+        // Form validation
+        if (!name || !email || !message) {
+            alert('Lütfen tüm alanları doldurun.');
+            return;
+        }
+
+        // Email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            alert('Lütfen geçerli bir e-posta adresi girin.');
+            return;
+        }
+
+        try {
+            const response = await fetch('https://formsubmit.co/ajax/metehanhacer2@gmail.com', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: name,
+                    email: email,
+                    message: message,
+                    _subject: 'Yeni Portfolio İletişim Formu Mesajı',
+                    _template: 'table'
+                })
+            });
+
+            const result = await response.json();
+            
+            if (result.success) {
+                alert('Mesajınız başarıyla gönderildi!');
+                form.reset();
+            } else {
+                throw new Error('Form gönderilemedi');
+            }
+        } catch (error) {
+            alert('Mesaj gönderilirken bir hata oluştu. Lütfen daha sonra tekrar deneyin.');
+            console.error('Form submission error:', error);
+        }
+    });
+}
