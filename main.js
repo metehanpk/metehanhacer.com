@@ -112,70 +112,70 @@ const portfolioItems = [
         title: 'Oyun Editi Örneği',
         description: 'Zula oyun montajı',
         thumbnail: 'assets/zula.jpg',
-        video: 'assets/zula_compressed.mp4',
+        video: 'https://res.cloudinary.com/drhgvt8rz/video/upload/v1/metehanhacer/zula',
         type: 'game'
     },
     {
         title: 'Tekstil Reklamı',
         description: 'Kurumsal tanıtım',
         thumbnail: 'assets/corporate.jpg',
-        video: 'assets/corporate_compressed.mp4',
+        video: 'https://res.cloudinary.com/drhgvt8rz/video/upload/v1/metehanhacer/corporate',
         type: 'corporate'
     },
     {
         title: 'Emlak Reklamı',
         description: 'Emlak tanıtım',
         thumbnail: 'assets/yeni-klip.jpg',
-        video: 'assets/yeni_klip_compressed.mp4',
+        video: 'https://res.cloudinary.com/drhgvt8rz/video/upload/v1/metehanhacer/yeni-klip',
         type: 'estate'
     },
     {
         title: 'Halloween',
         description: 'Cadılar bayramında eğlenceli anlar',
         thumbnail: 'assets/Ekran görüntüsü 2024-11-26 075159.png',
-        video: 'assets/halloween_compressed.mp4',
+        video: 'https://res.cloudinary.com/drhgvt8rz/video/upload/v1/metehanhacer/halloween',
         type: 'game'
     },
     {
         title: 'İçecek Hazırlama',
         description: 'İçecek hazırlama videosu',
         thumbnail: 'assets/Ekran görüntüsü 2024-11-26 195713.png',
-        video: 'assets/son_deneme_compressed.mp4',
+        video: 'https://res.cloudinary.com/drhgvt8rz/video/upload/v1/metehanhacer/son-deneme',
         type: 'special'
     },
     {
         title: 'Sirk Videosu',
         description: 'Kurumsal tanıtım',
         thumbnail: 'assets/Ekran görüntüsü 2024-11-26 193557.png',
-        video: 'assets/sirk_compressed.mp4',
+        video: 'https://res.cloudinary.com/drhgvt8rz/video/upload/v1/metehanhacer/sirk',
         type: 'corporate'
     },
     {
         title: 'Oyun Editi Örneği 2',
         description: 'Zula oyun montajı',
         thumbnail: 'assets/Ekran görüntüsü 2024-11-26 063458.png',
-        video: 'assets/4_compressed.mp4',
+        video: 'https://res.cloudinary.com/drhgvt8rz/video/upload/v1/metehanhacer/4',
         type: 'game'
     },
     {
         title: 'Tekstil Reklamı 2',
         description: 'Kurumsal Tanıtım',
         thumbnail: 'assets/Ekran görüntüsü 2024-11-26 235137.png',
-        video: 'assets/3_compressed.mp4',
+        video: 'https://res.cloudinary.com/drhgvt8rz/video/upload/v1/metehanhacer/3',
         type: 'special'
     },
     {
         title: 'Sosyal Medya İçin Mizah İçerikleri',
         description: '',
         thumbnail: 'assets/Ekran görüntüsü 2024-11-27 013848.png',
-        video: 'assets/comp_1_compressed.mp4',
+        video: 'https://res.cloudinary.com/drhgvt8rz/video/upload/v1/metehanhacer/comp-1',
         type: 'center'
     },
     {
         title: 'Logo Animasyonu Örneği',
         description: 'Animasyon Çalışmalarım',
         thumbnail: 'assets/Ekran görüntüsü 2024-11-28 201449.png',
-        video: 'assets/alevli_adidas_compressed.mp4',
+        video: 'https://res.cloudinary.com/drhgvt8rz/video/upload/v1/metehanhacer/alevli-adidas',
         type: 'center-main'
     }
 ];
