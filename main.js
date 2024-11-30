@@ -227,70 +227,90 @@ const portfolioItems = [
         description: "Kurumsal reklam videosu",
         type: "corporate",
         imageSrc: "./assets/corporate.jpg",
-        videoSrc: "./assets/corporate_compressed.mp4"
+        videoSrc: "https://www.youtube.com/embed/qlP8xYfWh58?autoplay=1&modestbranding=1&rel=0&showinfo=0",
+        isYoutube: true,
+        isVertical: true
     },
     {
         title: "Oyun Editi",
         description: "Zula oyun montajı",
         type: "game",
         imageSrc: "./assets/zula.jpg",
-        videoSrc: "./assets/zula_compressed.mp4"
+        videoSrc: "https://www.youtube.com/embed/hFVmYeu51vo?autoplay=1&modestbranding=1&rel=0&showinfo=0",
+        isYoutube: true,
+        isVertical: false
     },
     {
         title: "Emlak Reklamı",
         description: "Emlak tanıtım",
         type: "estate",
         imageSrc: "./assets/yeni-klip.jpg",
-        videoSrc: "./assets/yeni_klip_compressed.mp4"
+        videoSrc: "https://www.youtube.com/embed/18KLYl_N7x8?autoplay=1&modestbranding=1&rel=0&showinfo=0",
+        isYoutube: true,
+        isVertical: false
     },
     {
         title: "Halloween",
         description: "Cadılar bayramında eğlenceli anlar",
         type: "game",
         imageSrc: "./assets/Ekran görüntüsü 2024-11-26 075159.png",
-        videoSrc: "./assets/halloween_compressed.mp4"
+        videoSrc: "https://www.youtube.com/embed/kCAxUDbyRrI?autoplay=1&modestbranding=1&rel=0&showinfo=0",
+        isYoutube: true,
+        isVertical: true
     },
     {
         title: "İçecek Hazırlama",
         description: "İçecek hazırlama videosu",
         type: "special",
         imageSrc: "./assets/Ekran görüntüsü 2024-11-26 195713.png",
-        videoSrc: "./assets/son_deneme_compressed.mp4"
+        videoSrc: "https://www.youtube.com/embed/rcREpY1e7vA?autoplay=1&modestbranding=1&rel=0&showinfo=0",
+        isYoutube: true,
+        isVertical: true
     },
     {
         title: "Sirk Videosu",
         description: "Kurumsal tanıtım",
         type: "corporate",
         imageSrc: "./assets/Ekran görüntüsü 2024-11-26 193557.png",
-        videoSrc: "./assets/sirk_compressed.mp4"
+        videoSrc: "https://www.youtube.com/embed/zv5H_25jiAg?autoplay=1&modestbranding=1&rel=0&showinfo=0",
+        isYoutube: true,
+        isVertical: true
     },
     {
         title: "Oyun Editi Örneği 2",
         description: "Zula oyun montajı",
         type: "game",
         imageSrc: "./assets/Ekran görüntüsü 2024-11-26 063458.png",
-        videoSrc: "./assets/4_compressed.mp4"
+        videoSrc: "https://www.youtube.com/embed/YJfkI9kuSEs?autoplay=1&modestbranding=1&rel=0&showinfo=0",
+        isYoutube: true,
+        isVertical: false
     },
     {
         title: "Tekstil Reklamı 2",
         description: "Kurumsal Tanıtım",
         type: "special",
         imageSrc: "./assets/Ekran görüntüsü 2024-11-26 235137.png",
-        videoSrc: "./assets/3_compressed.mp4"
+        videoSrc: "https://www.youtube.com/embed/kaAFLfuZDJU?autoplay=1&modestbranding=1&rel=0&showinfo=0",
+        isYoutube: true,
+        isVertical: true
     },
     {
         title: "Sosyal Medya İçin Mizah İçerikleri",
         description: "",
         type: "center",
         imageSrc: "./assets/Ekran görüntüsü 2024-11-27 013848.png",
-        videoSrc: "./assets/comp_1_compressed.mp4"
+        videoSrc: "https://www.youtube.com/embed/dyyecdNEuF0?autoplay=1&modestbranding=1&rel=0&showinfo=0",
+        isYoutube: true,
+        isVertical: false
     },
     {
         title: "Logo Animasyonu Örneği",
         description: "Animasyon Çalışmalarım",
         type: "center-main",
         imageSrc: "./assets/Ekran görüntüsü 2024-11-28 201449.png",
-        videoSrc: "./assets/alevli_adidas_compressed.mp4"
+        videoSrc: "https://www.youtube.com/embed/DwEdm3FLbzU?autoplay=1&modestbranding=1&rel=0&showinfo=0",
+        isYoutube: true,
+        isVertical: false
     }
 ];
 
@@ -336,222 +356,180 @@ function initializePortfolio() {
 }
 
 function createPortfolioItem(item) {
-    const portfolioItem = document.createElement('div');
-    portfolioItem.className = 'group relative overflow-hidden rounded-xl bg-purple-950/30 transition-all duration-300 hover:bg-purple-950/40';
-    
-    const imageContainer = document.createElement('div');
-    imageContainer.className = 'aspect-[16/12] overflow-hidden relative';
-    
-    // Video önizleme
-    const previewVideo = document.createElement('video');
-    previewVideo.src = item.videoSrc;
-    previewVideo.className = 'h-full w-full object-cover transition-all duration-300 group-hover:scale-105 group-hover:blur-sm';
-    previewVideo.muted = true;
-    previewVideo.loop = true;
-    previewVideo.playsInline = true;
+    const article = document.createElement('article');
+    article.className = `
+        relative group overflow-hidden rounded-lg
+        transform transition-all duration-300
+        hover:scale-[1.02] hover:shadow-xl
+        cursor-pointer
+    `;
 
-    // Thumbnail image (fallback ve ilk yükleme için)
-    const thumbnailImg = document.createElement('img');
-    thumbnailImg.src = item.imageSrc;
-    thumbnailImg.className = 'absolute inset-0 w-full h-full object-cover transition-opacity duration-300';
-    thumbnailImg.alt = item.title;
+    // Thumbnail container
+    const thumbnailContainer = document.createElement('div');
+    thumbnailContainer.className = 'relative aspect-video w-full overflow-hidden';
+
+    // Ana thumbnail resmi
+    const thumbnail = document.createElement('img');
+    thumbnail.src = item.imageSrc;
+    thumbnail.alt = item.title;
+    thumbnail.className = `
+        w-full h-full object-cover
+        transform transition-all duration-500
+        group-hover:scale-105 group-hover:blur-sm
+    `;
+
+    // Video önizleme katmanı
+    if (item.isYoutube) {
+        const previewContainer = document.createElement('div');
+        previewContainer.className = `
+            absolute inset-0 opacity-0
+            transition-opacity duration-500
+            group-hover:opacity-100
+        `;
+
+        const videoId = item.videoSrc.match(/embed\/([^?]+)/)[1];
+        const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+        
+        previewContainer.style.backgroundImage = `url(${thumbnailUrl})`;
+        previewContainer.style.backgroundSize = 'cover';
+        previewContainer.style.backgroundPosition = 'center';
+        previewContainer.style.filter = 'blur(8px)';
+        
+        thumbnailContainer.appendChild(previewContainer);
+    }
+
+    // Play button overlay
+    const playButton = document.createElement('div');
+    playButton.className = `
+        absolute inset-0 flex items-center justify-center
+        bg-black/40 opacity-0 group-hover:opacity-100
+        transition-opacity duration-300
+    `;
     
-    // Hover overlay
-    const overlay = document.createElement('div');
-    overlay.className = 'absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center';
+    const playIcon = document.createElement('div');
+    playIcon.className = `
+        w-16 h-16 flex items-center justify-center
+        rounded-full bg-white/10 backdrop-blur-sm
+        transform transition-transform duration-300
+        group-hover:scale-110
+    `;
     
-    const playButton = document.createElement('button');
-    playButton.className = 'play-button bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-full transform -translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 border border-purple-500/30 hover:border-purple-500 shadow-purple-strong flex items-center gap-2';
-    playButton.innerHTML = `
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+    playIcon.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
         </svg>
-        İzle
     `;
-    
-    overlay.appendChild(playButton);
-    imageContainer.appendChild(thumbnailImg);
-    imageContainer.appendChild(previewVideo);
-    imageContainer.appendChild(overlay);
-    portfolioItem.appendChild(imageContainer);
-    
-    const content = document.createElement('div');
-    content.className = 'p-4';
-    content.innerHTML = `
-        <h3 class="text-lg font-semibold text-white">${item.title}</h3>
-        <p class="text-sm text-gray-400">${item.description}</p>
-        <span class="inline-block mt-2 text-xs text-purple-400">${item.type}</span>
+
+    // Info section
+    const info = document.createElement('div');
+    info.className = `
+        absolute bottom-0 left-0 right-0
+        bg-gradient-to-t from-black/80 to-transparent
+        p-4 text-white
+        transform transition-transform duration-300
     `;
-    
-    portfolioItem.appendChild(content);
 
-    // Hover olayları
-    portfolioItem.addEventListener('mouseenter', () => {
-        thumbnailImg.style.opacity = '0';
-        previewVideo.play().catch(() => {});
-    });
+    const title = document.createElement('h3');
+    title.textContent = item.title;
+    title.className = 'text-lg font-semibold mb-1';
 
-    portfolioItem.addEventListener('mouseleave', () => {
-        thumbnailImg.style.opacity = '1';
-        previewVideo.pause();
-        previewVideo.currentTime = 0;
-    });
+    const description = document.createElement('p');
+    description.textContent = item.description;
+    description.className = 'text-sm text-gray-300';
 
-    // Modal açma olayı
-    playButton.addEventListener('click', () => {
-        showVideoModal(item);
-    });
-    
-    return portfolioItem;
+    // Assembly
+    playButton.appendChild(playIcon);
+    info.appendChild(title);
+    info.appendChild(description);
+    thumbnailContainer.appendChild(thumbnail);
+    thumbnailContainer.appendChild(playButton);
+    article.appendChild(thumbnailContainer);
+    article.appendChild(info);
+
+    // Click handler
+    article.onclick = () => showVideoModal(item);
+
+    return article;
 }
 
 // Video modal fonksiyonu
 function showVideoModal(item) {
     const modal = document.createElement('div');
-    modal.className = 'fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/95 opacity-0 transition-all duration-300 backdrop-blur-sm';
+    modal.className = `
+        fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-8
+        bg-black/80 backdrop-blur-sm
+    `;
 
-    function checkVideoOrientation(video) {
-        return new Promise((resolve) => {
-            video.onloadedmetadata = () => {
-                const isVertical = video.videoHeight > video.videoWidth;
-                resolve(isVertical);
-            };
-            if (video.readyState >= 2) {
-                const isVertical = video.videoHeight > video.videoWidth;
-                resolve(isVertical);
-            }
-        });
-    }
-
-    const testVideo = document.createElement('video');
-    testVideo.src = item.videoSrc;
+    const modalContent = document.createElement('div');
+    modalContent.className = `
+        relative w-full mx-auto bg-gray-900 rounded-lg overflow-hidden
+        ring-1 ring-white/10 shadow-lg
+        ${item.isVertical ? 'max-w-[350px] sm:max-w-[400px]' : 'max-w-4xl'}
+    `;
     
-    checkVideoOrientation(testVideo).then(isVertical => {
-        const modalContent = document.createElement('div');
-        modalContent.className = `
-            relative bg-gradient-to-br from-purple-950/90 to-black/90 
-            rounded-2xl p-4 sm:p-6 w-full transform scale-95 transition-all duration-300 
-            shadow-2xl shadow-purple-900/20 border border-purple-500/10
-            mx-4 sm:mx-6
-        `;
-        
-        // Responsive modal genişlikleri
-        if (isVertical) {
-            modalContent.style.maxWidth = window.innerWidth < 640 ? '100%' : '500px';
-        } else {
-            modalContent.style.maxWidth = window.innerWidth < 640 ? '100%' : '1200px';
+    const videoContainer = document.createElement('div');
+    videoContainer.className = `
+        ${item.isVertical ? 'aspect-[9/16]' : 'aspect-video'}
+        relative
+    `;
+    
+    const video = document.createElement('iframe');
+    video.src = item.videoSrc;
+    video.frameBorder = "0";
+    video.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+    video.allowFullscreen = true;
+    video.className = 'absolute inset-0 w-full h-full';
+
+    const header = document.createElement('div');
+    header.className = 'p-4 flex justify-between items-center border-b border-white/10';
+    
+    const title = document.createElement('h3');
+    title.textContent = item.title;
+    title.className = 'text-lg font-semibold text-white';
+    
+    const closeButton = document.createElement('button');
+    closeButton.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+    `;
+    closeButton.className = 'text-gray-400 hover:text-white transition-colors';
+    closeButton.onclick = () => {
+        gsap.to(modal, {
+            opacity: 0,
+            duration: 0.2,
+            onComplete: () => modal.remove()
+        });
+    };
+
+    header.appendChild(title);
+    header.appendChild(closeButton);
+    videoContainer.appendChild(video);
+    modalContent.appendChild(header);
+    modalContent.appendChild(videoContainer);
+    modal.appendChild(modalContent);
+    document.body.appendChild(modal);
+
+    // Escape tuşu ile kapatma
+    const handleEscape = (e) => {
+        if (e.key === 'Escape') {
+            closeButton.click();
         }
+    };
+    document.addEventListener('keydown', handleEscape);
 
-        // Header bölümü
-        const header = document.createElement('div');
-        header.className = 'flex items-center justify-between mb-4';
-        
-        const titleContainer = document.createElement('div');
-        titleContainer.className = 'flex items-center gap-2 sm:gap-3';
-        
-        const playIcon = document.createElement('div');
-        playIcon.className = 'w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-purple-500/20 flex items-center justify-center';
-        playIcon.innerHTML = `
-            <svg class="w-3 h-3 sm:w-4 sm:h-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                    d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-            </svg>
-        `;
-
-        const title = document.createElement('h3');
-        title.className = 'text-base sm:text-xl font-semibold text-white/90 truncate';
-        title.textContent = item.title;
-        
-        titleContainer.appendChild(playIcon);
-        titleContainer.appendChild(title);
-
-        const closeButton = document.createElement('button');
-        closeButton.className = `
-            text-white/70 hover:text-white transition-colors
-            w-8 h-8 rounded-full hover:bg-white/10 flex items-center justify-center
-        `;
-        closeButton.innerHTML = `
-            <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-        `;
-
-        header.appendChild(titleContainer);
-        header.appendChild(closeButton);
-        
-        // Video container
-        const videoContainer = document.createElement('div');
-        videoContainer.className = `
-            ${isVertical ? 'aspect-[9/16]' : 'aspect-video'}
-            relative rounded-xl overflow-hidden bg-black/50
-            ring-1 ring-white/10 shadow-lg
-        `;
-        
-        const video = document.createElement('video');
-        video.src = item.videoSrc;
-        video.className = 'w-full h-full object-contain';
-        video.controls = true;
-        video.autoplay = true;
-        video.playsInline = true; // Mobil cihazlar için önemli
-
-        // Footer bölümü - Mobilde gizlenebilir
-        const footer = document.createElement('div');
-        footer.className = 'mt-4 text-xs sm:text-sm text-white/50 hidden sm:block';
-        footer.textContent = item.description || '';
-        
-        videoContainer.appendChild(video);
-        modalContent.appendChild(header);
-        modalContent.appendChild(videoContainer);
-        modalContent.appendChild(footer);
-        modal.appendChild(modalContent);
-        document.body.appendChild(modal);
-
-        // Touch olayları için kaydırma engellemesi
-        document.body.style.overflow = 'hidden';
-
-        // Animasyonlar
-        requestAnimationFrame(() => {
-            modal.style.opacity = '1';
-            modalContent.style.transform = 'scale(1)';
-            modalContent.style.opacity = '1';
-        });
-        
-        function closeModal(immediate = false) {
-            document.body.style.overflow = ''; // Kaydırmayı geri aç
-            modal.style.opacity = '0';
-            modalContent.style.transform = 'scale(95%)';
-            modalContent.style.opacity = '0';
-            
-            const delay = immediate ? 0 : 300;
-            setTimeout(() => {
-                document.body.removeChild(modal);
-                video.pause();
-            }, delay);
+    // Modal dışına tıklama ile kapatma
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            closeButton.click();
         }
-        
-        closeButton.addEventListener('click', () => closeModal());
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) closeModal();
-        });
-        
-        // Touch olayları için
-        modal.addEventListener('touchstart', (e) => {
-            if (e.target === modal) closeModal();
-        });
-        
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') closeModal();
-        });
+    });
 
-        // Ekran yönü değiştiğinde modal boyutunu güncelle
-        window.addEventListener('resize', () => {
-            if (isVertical) {
-                modalContent.style.maxWidth = window.innerWidth < 640 ? '100%' : '500px';
-            } else {
-                modalContent.style.maxWidth = window.innerWidth < 640 ? '100%' : '1200px';
-            }
-        });
+    // Modal açılış animasyonu
+    gsap.from(modalContent, {
+        y: 20,
+        opacity: 0,
+        duration: 0.3
     });
 }
 
