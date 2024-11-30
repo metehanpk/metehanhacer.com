@@ -202,92 +202,22 @@ function initializeContactAnimations() {
     });
 
     // Contact info animations
-    const contactInfoTl = gsap.timeline({
-        scrollTrigger: {
-            trigger: '.contact-info',
-            start: 'top bottom-=50',
-            end: 'bottom center',
-            toggleActions: 'play none none reverse'
-        }
-    });
-
-    contactInfoTl
-        .from('.contact-info > div', {
-            y: 50,
+    const contactItems = document.querySelectorAll('#contact .flex');
+    if (contactItems.length > 0) {
+        gsap.from(contactItems, {
+            scrollTrigger: {
+                trigger: '#contact .space-y-6',
+                start: 'top bottom-=50',
+                end: 'bottom center',
+                toggleActions: 'play none none reverse'
+            },
+            y: 30,
             opacity: 0,
             duration: 0.6,
-            ease: 'power2.out'
-        })
-        .from('.contact-info .flex', {
-            x: -30,
-            opacity: 0,
-            duration: 0.4,
             stagger: 0.2,
             ease: 'power2.out'
-        }, '-=0.2');
-
-    // Form animations
-    const formTl = gsap.timeline({
-        scrollTrigger: {
-            trigger: '#contact-form',
-            start: 'top bottom-=50',
-            end: 'bottom center',
-            toggleActions: 'play none none reverse'
-        }
-    });
-
-    formTl
-        .from('#contact-form', {
-            y: 50,
-            opacity: 0,
-            duration: 0.6,
-            ease: 'power2.out'
-        })
-        .from('#contact-form > div', {
-            y: 20,
-            opacity: 0,
-            duration: 0.4,
-            stagger: 0.1,
-            ease: 'power2.out'
-        }, '-=0.2');
-
-    // Form interaction animations
-    const formInputs = document.querySelectorAll('#contact-form input, #contact-form textarea');
-    formInputs.forEach(input => {
-        input.addEventListener('focus', () => {
-            gsap.to(input, {
-                scale: 1.02,
-                duration: 0.3,
-                ease: 'power2.out'
-            });
         });
-
-        input.addEventListener('blur', () => {
-            gsap.to(input, {
-                scale: 1,
-                duration: 0.3,
-                ease: 'power2.out'
-            });
-        });
-    });
-
-    // Form submit animation
-    const form = document.getElementById('contact-form');
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-
-        gsap.to(form, {
-            scale: 0.98,
-            duration: 0.2,
-            ease: 'power2.out',
-            yoyo: true,
-            repeat: 1,
-            onComplete: () => {
-                // Form submit işlemleri burada yapılabilir
-                form.reset();
-            }
-        });
-    });
+    }
 }
 
 // Portfolio items data
