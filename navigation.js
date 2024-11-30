@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
     let isScrolling = false;
     let lastScrollY = window.scrollY;
-    let ticking = false;
     const toast = new Toast();
 
     // Mobil menü toggle fonksiyonu
@@ -18,11 +17,11 @@ document.addEventListener('DOMContentLoaded', () => {
         
         if (!isOpen) {
             mobileMenu.style.display = 'block';
-            setTimeout(() => {
+            requestAnimationFrame(() => {
                 mobileMenuContent.style.opacity = '1';
                 mobileMenuContent.style.transform = 'translateY(0)';
-            }, 10);
-            mobileMenu.classList.add('active');
+                mobileMenu.classList.add('active');
+            });
         } else {
             mobileMenuContent.style.opacity = '0';
             mobileMenuContent.style.transform = 'translateY(-0.5rem)';
@@ -35,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Mobil menü buton click eventi
     mobileMenuButton.addEventListener('click', (e) => {
+        e.preventDefault();
         e.stopPropagation();
         toggleMobileMenu();
     });
@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Nav linkler için scroll ve active state
     navLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
+        link.addEventListener('click', async (e) => {
             e.preventDefault();
             const targetId = e.currentTarget.getAttribute('href');
             
@@ -61,6 +61,9 @@ document.addEventListener('DOMContentLoaded', () => {
             if (targetId === '#contact') {
                 e.stopPropagation();
                 toast.error('İletişim bölümü şu anda bakımdadır. En kısa sürede aktif olacaktır.', 5000);
+                if (mobileMenu.classList.contains('active')) {
+                    toggleMobileMenu();
+                }
                 return;
             }
 
@@ -71,38 +74,43 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Mobil menüyü kapat
                 if (mobileMenu.classList.contains('active')) {
                     toggleMobileMenu();
+                    // Menü kapanma animasyonunu bekle
+                    await new Promise(resolve => setTimeout(resolve, 300));
                 }
 
                 isScrolling = true;
                 navLinks.forEach(l => l.classList.remove('active'));
                 link.classList.add('active');
 
+                // Header yüksekliğini hesapla
+                const headerHeight = document.querySelector('nav').offsetHeight;
+                const offset = window.innerWidth <= 768 ? headerHeight + 20 : 50;
+
                 // Gelişmiş scroll animasyonu
                 const currentScroll = window.pageYOffset;
-                const targetScroll = targetSection.offsetTop - 50;
+                const targetScroll = targetSection.offsetTop - offset;
                 const distance = Math.abs(targetScroll - currentScroll);
-                const duration = Math.min(1.5, 0.5 + distance / 3000);
+                const duration = Math.min(1.2, 0.5 + distance / 4000);
 
-                gsap.to(window, {
+                await gsap.to(window, {
                     duration: duration,
                     scrollTo: {
                         y: targetSection,
-                        offsetY: 50,
+                        offsetY: offset,
                         autoKill: false
                     },
-                    ease: "power2.inOut",
-                    onComplete: () => {
-                        isScrolling = false;
-                        updateActiveLink(window.scrollY);
-                    }
+                    ease: "power2.out"
                 });
+
+                isScrolling = false;
+                updateActiveLink(window.scrollY);
             }
         });
     });
 
     // Scroll event listener - throttle ile optimize edildi
     let lastTime = 0;
-    const throttleDelay = 100; // 100ms
+    const throttleDelay = 100;
 
     window.addEventListener('scroll', () => {
         const now = Date.now();
@@ -130,10 +138,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (isScrolling) return;
 
         const sections = document.querySelectorAll('section[id]');
+        const headerHeight = document.querySelector('nav').offsetHeight;
+        const offset = window.innerWidth <= 768 ? headerHeight : 100;
+        
         let currentSection = '';
-
+        
         sections.forEach(section => {
-            const sectionTop = section.offsetTop - 100;
+            const sectionTop = section.offsetTop - offset;
             const sectionHeight = section.offsetHeight;
             
             if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
@@ -153,8 +164,10 @@ document.addEventListener('DOMContentLoaded', () => {
 // Sayfa yüklendiğinde ve resize olduğunda section offsetları güncelle
 function updateSectionOffsets() {
     const sections = document.querySelectorAll('section[id]');
+    const headerHeight = document.querySelector('nav').offsetHeight;
+    
     sections.forEach(section => {
-        section.dataset.offset = section.offsetTop;
+        section.dataset.offset = section.offsetTop - headerHeight;
     });
 }
 
