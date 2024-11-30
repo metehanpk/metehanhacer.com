@@ -226,71 +226,71 @@ const portfolioItems = [
         title: "Tekstil Reklamı",
         description: "Kurumsal reklam videosu",
         type: "corporate",
-        imageSrc: "/assets/corporate.jpg",
-        videoSrc: "/assets/corporate_compressed.mp4"
+        imageSrc: "./assets/corporate.jpg",
+        videoSrc: "./assets/corporate_compressed.mp4"
     },
     {
         title: "Oyun Editi",
         description: "Zula oyun montajı",
         type: "game",
-        imageSrc: "/assets/zula.jpg",
-        videoSrc: "/assets/zula_compressed.mp4"
+        imageSrc: "./assets/zula.jpg",
+        videoSrc: "./assets/zula_compressed.mp4"
     },
     {
         title: "Emlak Reklamı",
         description: "Emlak tanıtım",
         type: "estate",
-        imageSrc: "/assets/yeni-klip.jpg",
-        videoSrc: "/assets/yeni_klip_compressed.mp4"
+        imageSrc: "./assets/yeni-klip.jpg",
+        videoSrc: "./assets/yeni_klip_compressed.mp4"
     },
     {
         title: "Halloween",
         description: "Cadılar bayramında eğlenceli anlar",
         type: "game",
-        imageSrc: "/assets/Ekran görüntüsü 2024-11-26 075159.png",
-        videoSrc: "/assets/halloween_compressed.mp4"
+        imageSrc: "./assets/Ekran görüntüsü 2024-11-26 075159.png",
+        videoSrc: "./assets/halloween_compressed.mp4"
     },
     {
         title: "İçecek Hazırlama",
         description: "İçecek hazırlama videosu",
         type: "special",
-        imageSrc: "/assets/Ekran görüntüsü 2024-11-26 195713.png",
-        videoSrc: "/assets/son_deneme_compressed.mp4"
+        imageSrc: "./assets/Ekran görüntüsü 2024-11-26 195713.png",
+        videoSrc: "./assets/son_deneme_compressed.mp4"
     },
     {
         title: "Sirk Videosu",
         description: "Kurumsal tanıtım",
         type: "corporate",
-        imageSrc: "/assets/Ekran görüntüsü 2024-11-26 193557.png",
-        videoSrc: "/assets/sirk_compressed.mp4"
+        imageSrc: "./assets/Ekran görüntüsü 2024-11-26 193557.png",
+        videoSrc: "./assets/sirk_compressed.mp4"
     },
     {
         title: "Oyun Editi Örneği 2",
         description: "Zula oyun montajı",
         type: "game",
-        imageSrc: "/assets/Ekran görüntüsü 2024-11-26 063458.png",
-        videoSrc: "/assets/4_compressed.mp4"
+        imageSrc: "./assets/Ekran görüntüsü 2024-11-26 063458.png",
+        videoSrc: "./assets/4_compressed.mp4"
     },
     {
         title: "Tekstil Reklamı 2",
         description: "Kurumsal Tanıtım",
         type: "special",
-        imageSrc: "/assets/Ekran görüntüsü 2024-11-26 235137.png",
-        videoSrc: "/assets/3_compressed.mp4"
+        imageSrc: "./assets/Ekran görüntüsü 2024-11-26 235137.png",
+        videoSrc: "./assets/3_compressed.mp4"
     },
     {
         title: "Sosyal Medya İçin Mizah İçerikleri",
         description: "",
         type: "center",
-        imageSrc: "/assets/Ekran görüntüsü 2024-11-27 013848.png",
-        videoSrc: "/assets/comp_1_compressed.mp4"
+        imageSrc: "./assets/Ekran görüntüsü 2024-11-27 013848.png",
+        videoSrc: "./assets/comp_1_compressed.mp4"
     },
     {
         title: "Logo Animasyonu Örneği",
         description: "Animasyon Çalışmalarım",
         type: "center-main",
-        imageSrc: "/assets/Ekran görüntüsü 2024-11-28 201449.png",
-        videoSrc: "/assets/alevli_adidas_compressed.mp4"
+        imageSrc: "./assets/Ekran görüntüsü 2024-11-28 201449.png",
+        videoSrc: "./assets/alevli_adidas_compressed.mp4"
     }
 ];
 

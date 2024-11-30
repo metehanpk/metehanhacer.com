@@ -1,57 +1,63 @@
 // Particles.js konfigürasyonu
 document.addEventListener('DOMContentLoaded', function() {
-    const isLowEnd = window.navigator.hardwareConcurrency <= 4;
-    const isMobile = window.innerWidth < 768;
-    
     particlesJS("particles-js", {
         particles: {
             number: {
-                value: isLowEnd ? 15 : (isMobile ? 20 : 30), // Daha da az parçacık
+                value: 100,
                 density: {
                     enable: true,
                     value_area: 1000
                 }
             },
             color: {
-                value: "#9333ea"
+                value: ["#8B5CF6", "#6366F1", "#3B82F6", "#EC4899", "#8B5CF6"]
             },
             shape: {
-                type: "circle" // Sadece daire
+                type: "circle",
+                stroke: {
+                    width: 0,
+                    color: "#000000"
+                }
             },
             opacity: {
-                value: 0.3,
-                random: false,
+                value: 0.6,
+                random: true,
                 anim: {
-                    enable: false
+                    enable: true,
+                    speed: 1,
+                    opacity_min: 0.1,
+                    sync: false
                 }
             },
             size: {
-                value: 1.5,
-                random: false,
+                value: 3,
+                random: true,
                 anim: {
-                    enable: false
+                    enable: true,
+                    speed: 2,
+                    size_min: 0.1,
+                    sync: false
                 }
             },
             line_linked: {
                 enable: true,
                 distance: 150,
-                color: "#9333ea",
-                opacity: 0.2,
-                width: 1,
-                triangles: {
-                    enable: false
-                }
+                color: "#6366F1",
+                opacity: 0.3,
+                width: 1
             },
             move: {
                 enable: true,
-                speed: isLowEnd ? 1 : (isMobile ? 1.5 : 2),
+                speed: 3,
                 direction: "none",
-                random: false,
+                random: true,
                 straight: false,
                 out_mode: "out",
                 bounce: false,
                 attract: {
-                    enable: false
+                    enable: true,
+                    rotateX: 600,
+                    rotateY: 1200
                 }
             }
         },
@@ -59,25 +65,27 @@ document.addEventListener('DOMContentLoaded', function() {
             detect_on: "canvas",
             events: {
                 onhover: {
-                    enable: !isLowEnd && !isMobile, // Düşük performanslı cihazlarda devre dışı
+                    enable: true,
                     mode: "grab"
                 },
                 onclick: {
-                    enable: false
+                    enable: true,
+                    mode: "push"
                 },
                 resize: true
             },
             modes: {
                 grab: {
-                    distance: 100,
+                    distance: 140,
                     line_linked: {
                         opacity: 0.5
                     }
+                },
+                push: {
+                    particles_nb: 4
                 }
             }
         },
-        fps_limit: 30,
-        retina_detect: false,
-        detect_on: "canvas"
+        retina_detect: true
     });
 });

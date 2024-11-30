@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let isScrolling = false;
     let lastScrollY = window.scrollY;
     let ticking = false;
+    const toast = new Toast(); // Toast instance'ı oluştur
 
     // İlk yüklemede aktif linki belirle
     updateActiveLink(window.scrollY);
@@ -16,9 +17,16 @@ document.addEventListener('DOMContentLoaded', () => {
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
-            if (isScrolling) return;
-
             const targetId = e.currentTarget.getAttribute('href');
+            
+            // İletişim linkine tıklandığında
+            if (targetId === '#contact') {
+                e.stopPropagation(); // Event propagation'ı durdur
+                toast.error('İletişim bölümü şu anda bakımdadır. En kısa sürede aktif olacaktır.', 5000);
+                return;
+            }
+
+            if (isScrolling) return;
             const targetSection = document.querySelector(targetId);
             
             if (targetSection) {
