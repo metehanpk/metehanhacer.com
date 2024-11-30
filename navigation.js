@@ -5,8 +5,8 @@ gsap.registerPlugin(ScrollToPlugin);
 document.addEventListener('DOMContentLoaded', () => {
     const mobileMenuButton = document.getElementById('mobile-menu-button');
     const mobileMenu = document.getElementById('mobile-menu');
-    const mobileMenuContent = mobileMenu.querySelector('div');
-    const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
+    const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+    const navLinks = document.querySelectorAll('.nav-link');
     let isScrolling = false;
     let lastScrollY = window.scrollY;
     const toast = new Toast();
@@ -17,22 +17,28 @@ document.addEventListener('DOMContentLoaded', () => {
         
         if (!isOpen) {
             // Menüyü aç
-            document.body.style.overflow = 'hidden'; // Scroll'u engelle
-            mobileMenu.style.display = 'block';
-            mobileMenu.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            mobileMenu.style.display = 'flex';
             requestAnimationFrame(() => {
-                mobileMenuContent.style.opacity = '1';
-                mobileMenuContent.style.transform = 'translateY(0)';
+                mobileMenu.classList.add('active');
+                gsap.to(mobileMenu, {
+                    opacity: 1,
+                    duration: 0.3,
+                    ease: 'power2.out'
+                });
             });
         } else {
             // Menüyü kapat
-            mobileMenuContent.style.opacity = '0';
-            mobileMenuContent.style.transform = 'translateY(-1rem)';
-            setTimeout(() => {
-                mobileMenu.classList.remove('active');
-                mobileMenu.style.display = 'none';
-                document.body.style.overflow = ''; // Scroll'u serbest bırak
-            }, 300);
+            gsap.to(mobileMenu, {
+                opacity: 0,
+                duration: 0.3,
+                ease: 'power2.in',
+                onComplete: () => {
+                    mobileMenu.classList.remove('active');
+                    mobileMenu.style.display = 'none';
+                    document.body.style.overflow = '';
+                }
+            });
         }
     }
 
@@ -43,32 +49,59 @@ document.addEventListener('DOMContentLoaded', () => {
         toggleMobileMenu();
     });
 
-    // Sayfa dışı tıklamada menüyü kapat
-    document.addEventListener('click', (e) => {
-        if (mobileMenu.classList.contains('active') && 
-            !mobileMenu.contains(e.target) && 
-            !mobileMenuButton.contains(e.target)) {
+    // Mobil menü linkleri için event listener
+    mobileLinks.forEach(link => {
+        link.addEventListener('click', async (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+
+            const targetId = link.getAttribute('href');
+            
+            // İletişim linkine tıklandığında
+            if (targetId === '#contact') {
+                toast.error('İletişim bölümü şu anda bakımdadır. En kısa sürede aktif olacaktır.', 5000);
+                toggleMobileMenu();
+                return;
+            }
+
+            const targetSection = document.querySelector(targetId);
+            if (!targetSection) return;
+
+            // Önce menüyü kapat
             toggleMobileMenu();
-        }
+            
+            // Menü kapanma animasyonunu bekle
+            await new Promise(resolve => setTimeout(resolve, 300));
+
+            // Smooth scroll
+            const headerHeight = document.querySelector('nav').offsetHeight || 0;
+            const offset = headerHeight + 20;
+
+            gsap.to(window, {
+                duration: 1,
+                scrollTo: {
+                    y: targetSection,
+                    offsetY: offset,
+                    autoKill: false
+                },
+                ease: 'power2.out'
+            });
+
+            // URL'i güncelle
+            history.pushState(null, '', targetId);
+        });
     });
 
-    // İlk yüklemede aktif linki belirle
-    updateActiveLink(window.scrollY);
-
-    // Nav linkler için scroll ve active state
+    // Desktop nav linkleri için event listener
     navLinks.forEach(link => {
         link.addEventListener('click', async (e) => {
             e.preventDefault();
             e.stopPropagation();
 
-            const targetId = e.currentTarget.getAttribute('href');
+            const targetId = link.getAttribute('href');
             
-            // İletişim linkine tıklandığında
             if (targetId === '#contact') {
                 toast.error('İletişim bölümü şu anda bakımdadır. En kısa sürede aktif olacaktır.', 5000);
-                if (mobileMenu.classList.contains('active')) {
-                    toggleMobileMenu();
-                }
                 return;
             }
 
@@ -80,35 +113,23 @@ document.addEventListener('DOMContentLoaded', () => {
             isScrolling = true;
 
             try {
-                // Mobil menüyü kapat
-                if (mobileMenu.classList.contains('active')) {
-                    toggleMobileMenu();
-                    // Menü kapanma animasyonunu bekle
-                    await new Promise(resolve => setTimeout(resolve, 300));
-                }
-
                 // Aktif linki güncelle
                 navLinks.forEach(l => l.classList.remove('active'));
                 link.classList.add('active');
 
                 // Header yüksekliğini hesapla
                 const headerHeight = document.querySelector('nav').offsetHeight || 0;
-                const offset = window.innerWidth <= 768 ? headerHeight + 20 : 50;
+                const offset = headerHeight + 50;
 
                 // Smooth scroll animasyonu
-                const currentScroll = window.pageYOffset;
-                const targetScroll = targetSection.offsetTop - offset;
-                const distance = Math.abs(targetScroll - currentScroll);
-                const duration = Math.min(1.2, 0.5 + distance / 4000);
-
                 await gsap.to(window, {
-                    duration: duration,
+                    duration: 1,
                     scrollTo: {
                         y: targetSection,
                         offsetY: offset,
                         autoKill: false
                     },
-                    ease: "power2.out"
+                    ease: 'power2.out'
                 });
 
                 // URL'i güncelle
@@ -153,7 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const sections = document.querySelectorAll('section[id]');
         const headerHeight = document.querySelector('nav').offsetHeight || 0;
-        const offset = window.innerWidth <= 768 ? headerHeight + 20 : 100;
+        const offset = headerHeight + 100;
         
         let currentSection = '';
 
@@ -166,7 +187,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        navLinks.forEach(link => {
+        const allLinks = [...navLinks, ...mobileLinks];
+        allLinks.forEach(link => {
             link.classList.remove('active');
             if (link.getAttribute('href') === `#${currentSection}`) {
                 link.classList.add('active');
