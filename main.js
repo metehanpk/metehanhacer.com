@@ -720,6 +720,26 @@ function initNavigation() {
     }
 }
 
+// Hero section butonları için smooth scroll
+document.querySelectorAll('.hero-section a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        const targetSection = document.querySelector(targetId);
+        
+        if (targetSection) {
+            gsap.to(window, {
+                duration: 1,
+                scrollTo: {
+                    y: targetSection,
+                    offsetY: 50
+                },
+                ease: "power2.inOut"
+            });
+        }
+    });
+});
+
 // Debounce yardımcı fonksiyonu
 function debounce(func, wait) {
     let timeout;

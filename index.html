@@ -51,6 +51,10 @@
                 </button>
                 <!-- Desktop Navigation -->
                 <div class="hidden sm:flex space-x-8">
+                    <a href="#hero" class="nav-link relative text-white hover:text-purple-400 transition-colors py-2">
+                        Ana Sayfa
+                        <span class="nav-indicator"></span>
+                    </a>
                     <a href="#portfolio" class="nav-link relative text-white hover:text-purple-400 transition-colors py-2">
                         Portfolyo
                         <span class="nav-indicator"></span>
@@ -69,15 +73,18 @@
     </nav>
 
     <!-- Mobile Menu Overlay -->
-    <div id="mobile-menu" class="fixed inset-0 lg:hidden bg-black/95 backdrop-blur-lg z-50 hidden">
-        <div class="flex flex-col items-center justify-center h-full space-y-8 py-8">
-            <a href="#portfolio" class="mobile-nav-link text-2xl font-medium text-white hover:text-purple-400 transition-all">
+    <div id="mobile-menu" class="fixed inset-0 lg:hidden bg-black bg-opacity-50 backdrop-blur-sm z-50 hidden">
+        <div class="flex flex-col items-center justify-center h-full space-y-8">
+            <a href="#hero" class="mobile-nav-link text-white text-2xl hover:text-purple-400 transition-colors">
+                Ana Sayfa
+            </a>
+            <a href="#portfolio" class="mobile-nav-link text-white text-2xl hover:text-purple-400 transition-colors">
                 Portfolyo
             </a>
-            <a href="#about" class="mobile-nav-link text-2xl font-medium text-white hover:text-purple-400 transition-all">
+            <a href="#about" class="mobile-nav-link text-white text-2xl hover:text-purple-400 transition-colors">
                 Hakkımda
             </a>
-            <a href="#contact" class="mobile-nav-link text-2xl font-medium text-white hover:text-purple-400 transition-all">
+            <a href="#contact" class="mobile-nav-link text-white text-2xl hover:text-purple-400 transition-colors">
                 İletişim
             </a>
         </div>
@@ -118,11 +125,11 @@
                     <p class="glitch-text text-lg sm:text-xl lg:text-2xl text-gray-300 mb-8">Video Editörü & İçerik Üreticisi</p>
                     
                     <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                        <a href="#portfolio" class="cyber-button inline-flex items-center justify-center px-6 py-3 text-base font-medium rounded-md text-white bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 transform hover:scale-105 transition-all duration-300">
-                            <span class="relative z-10">Portfolyo</span>
+                        <a href="#portfolio" class="hero-button bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105">
+                            Portfolyo
                         </a>
-                        <a href="#contact" class="cyber-button inline-flex items-center justify-center px-6 py-3 border border-purple-500 text-base font-medium rounded-md text-purple-400 hover:text-purple-300 hover:border-purple-400 transform hover:scale-105 transition-all duration-300">
-                            <span class="relative z-10">İletişime Geç</span>
+                        <a href="#contact" class="hero-button bg-transparent border-2 border-purple-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-purple-600 transition-all duration-300 transform hover:scale-105">
+                            İletişime Geç
                         </a>
                     </div>
                 </div>
