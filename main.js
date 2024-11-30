@@ -49,71 +49,33 @@ function initializeAnimations() {
             scrollTrigger: {
                 trigger: '#about',
                 start: 'top center+=100',
+                end: 'bottom center',
                 toggleActions: 'play none none reverse'
             },
-            y: 60,
             opacity: 0,
+            y: 50,
             duration: 1,
-            stagger: 0.2,
-            ease: 'power3.out'
+            stagger: 0.2
         });
-
-        const skillItems = aboutSection.querySelectorAll('.skill-item');
-        if (skillItems.length > 0) {
-            gsap.from(skillItems, {
-                scrollTrigger: {
-                    trigger: skillItems[0],
-                    start: 'top center+=100',
-                    toggleActions: 'play none none reverse'
-                },
-                x: -30,
-                opacity: 0,
-                duration: 0.8,
-                stagger: 0.1,
-                ease: 'power2.out'
-            });
-        }
     }
 
     // Contact Section Animations
     const contactSection = document.querySelector('#contact');
     if (contactSection) {
-        const contactInfo = contactSection.querySelector('.contact-info');
-        const contactForm = contactSection.querySelector('#contact-form');
-
-        if (contactInfo && contactForm) {
-            gsap.from([contactInfo, contactForm], {
-                scrollTrigger: {
-                    trigger: '#contact',
-                    start: 'top center+=100',
-                    toggleActions: 'play none none reverse'
-                },
-                y: 60,
-                opacity: 0,
-                duration: 1,
-                stagger: 0.2,
-                ease: 'power3.out'
-            });
-        }
-
-        const socialIcons = contactSection.querySelectorAll('.contact-info svg');
-        if (socialIcons.length > 0) {
-            gsap.from(socialIcons, {
-                scrollTrigger: {
-                    trigger: socialIcons[0],
-                    start: 'top center+=150',
-                    toggleActions: 'play none none reverse'
-                },
-                scale: 0,
-                opacity: 0,
-                duration: 0.5,
-                stagger: 0.1,
-                ease: 'back.out(1.7)'
-            });
-        }
+        const contactItems = contactSection.querySelectorAll('.flex.items-center');
+        gsap.from(contactItems, {
+            scrollTrigger: {
+                trigger: '#contact',
+                start: 'top center+=100',
+                end: 'bottom center',
+                toggleActions: 'play none none reverse'
+            },
+            opacity: 0,
+            x: -50,
+            duration: 1,
+            stagger: 0.2
+        });
     }
-
-    initializeContactAnimations();
 }
 
 // About Section Animations
@@ -663,74 +625,7 @@ function showVideoModal(item) {
     });
 }
 
-// Contact Form Handling
-function initContactForm() {
-    const contactForm = document.getElementById('contact-form');
-    const formStatus = document.getElementById('form-status');
-
-    if (!contactForm || !formStatus) return;
-
-    contactForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        
-        const submitButton = contactForm.querySelector('button[type="submit"]');
-        if (!submitButton) return;
-
-        const originalButtonText = submitButton.textContent;
-        submitButton.textContent = 'Gönderiliyor...';
-        submitButton.disabled = true;
-        
-        try {
-            const formData = new FormData(contactForm);
-            const data = Object.fromEntries(formData.entries());
-            
-            // Form validation
-            if (!validateFormData(data)) {
-                throw new Error('Lütfen tüm zorunlu alanları doldurun.');
-            }
-            
-            // Simulate form submission (replace with actual API endpoint)
-            await new Promise(resolve => setTimeout(resolve, 1500));
-            
-            showFormStatus('success', 'Mesajınız başarıyla gönderildi!');
-            contactForm.reset();
-            
-        } catch (error) {
-            showFormStatus('error', error.message || 'Bir hata oluştu. Lütfen tekrar deneyin.');
-        } finally {
-            submitButton.textContent = originalButtonText;
-            submitButton.disabled = false;
-        }
-    });
-
-    function validateFormData(data) {
-        const requiredFields = ['name', 'email', 'message'];
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        
-        for (const field of requiredFields) {
-            if (!data[field] || !data[field].trim()) {
-                return false;
-            }
-        }
-        
-        if (!emailRegex.test(data.email)) {
-            throw new Error('Lütfen geçerli bir e-posta adresi girin.');
-        }
-        
-        return true;
-    }
-
-    function showFormStatus(type, message) {
-        formStatus.classList.remove('hidden', 'text-red-500', 'text-green-500');
-        formStatus.classList.add(type === 'success' ? 'text-green-500' : 'text-red-500');
-        formStatus.textContent = message;
-        
-        setTimeout(() => {
-            formStatus.classList.add('hidden');
-        }, 5000);
-    }
-}
-
+// Navigation
 function initNavigation() {
     const mobileMenuButton = document.querySelector('[data-mobile-menu-button]');
     const mobileMenu = document.querySelector('[data-mobile-menu]');
@@ -852,67 +747,10 @@ window.addEventListener('load', () => {
     updateScrollAnimations();
 });
 
-// Form gönderimi için responsive kontrol
-const contactForm = document.getElementById('contact-form');
-if (contactForm) {
-    contactForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        
-        // Form verilerini al
-        const formData = new FormData(contactForm);
-        const data = Object.fromEntries(formData);
-        
-        try {
-            // Form gönderimi sırasında butonu devre dışı bırak
-            const submitButton = contactForm.querySelector('button[type="submit"]');
-            submitButton.disabled = true;
-            submitButton.innerHTML = 'Gönderiliyor...';
-            
-            // Form gönderimi simülasyonu
-            await new Promise(resolve => setTimeout(resolve, 1000));
-            
-            // Başarılı gönderim
-            showToast('Mesajınız başarıyla gönderildi!', 'success');
-            contactForm.reset();
-        } catch (error) {
-            showToast('Bir hata oluştu. Lütfen tekrar deneyin.', 'error');
-        } finally {
-            // Butonu tekrar aktif et
-            const submitButton = contactForm.querySelector('button[type="submit"]');
-            submitButton.disabled = false;
-            submitButton.innerHTML = 'Gönder';
-        }
-    });
-}
-
-// Toast bildirimi için responsive stil
-function showToast(message, type = 'success') {
-    const toast = document.createElement('div');
-    toast.className = `fixed bottom-4 left-4 right-4 md:left-auto md:right-4 md:w-96 p-4 rounded-lg text-white ${
-        type === 'success' ? 'bg-green-500' : 'bg-red-500'
-    } transform transition-all duration-300 translate-y-full opacity-0`;
-    
-    toast.textContent = message;
-    document.body.appendChild(toast);
-    
-    // Toast'u göster
-    requestAnimationFrame(() => {
-        toast.style.transform = 'translateY(0)';
-        toast.style.opacity = '1';
-    });
-    
-    // 3 saniye sonra kaldır
-    setTimeout(() => {
-        toast.style.transform = 'translateY(100%)';
-        toast.style.opacity = '0';
-        setTimeout(() => toast.remove(), 300);
-    }, 3000);
-}
-
 document.addEventListener('DOMContentLoaded', function() {
     initLoader();
     initializeAnimations();
     initializeAboutAnimations();
-    initContactForm();
+    initializeContactAnimations();
     initNavigation();
 });
