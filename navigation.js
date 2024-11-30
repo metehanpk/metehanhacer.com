@@ -3,12 +3,50 @@ gsap.registerPlugin(ScrollToPlugin);
 
 // Navigasyon işlevleri
 document.addEventListener('DOMContentLoaded', () => {
-    const navMenu = document.querySelector('.nav-menu');
-    const navLinks = document.querySelectorAll('.nav-link');
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileMenuContent = mobileMenu.querySelector('div');
+    const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
     let isScrolling = false;
     let lastScrollY = window.scrollY;
     let ticking = false;
-    const toast = new Toast(); // Toast instance'ı oluştur
+    const toast = new Toast();
+
+    // Mobil menü toggle fonksiyonu
+    function toggleMobileMenu() {
+        const isOpen = mobileMenu.classList.contains('active');
+        
+        if (!isOpen) {
+            mobileMenu.style.display = 'block';
+            setTimeout(() => {
+                mobileMenuContent.style.opacity = '1';
+                mobileMenuContent.style.transform = 'translateY(0)';
+            }, 10);
+            mobileMenu.classList.add('active');
+        } else {
+            mobileMenuContent.style.opacity = '0';
+            mobileMenuContent.style.transform = 'translateY(-0.5rem)';
+            setTimeout(() => {
+                mobileMenu.style.display = 'none';
+                mobileMenu.classList.remove('active');
+            }, 300);
+        }
+    }
+
+    // Mobil menü buton click eventi
+    mobileMenuButton.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleMobileMenu();
+    });
+
+    // Sayfa dışı tıklamada menüyü kapat
+    document.addEventListener('click', (e) => {
+        if (mobileMenu.classList.contains('active') && 
+            !mobileMenu.contains(e.target) && 
+            !mobileMenuButton.contains(e.target)) {
+            toggleMobileMenu();
+        }
+    });
 
     // İlk yüklemede aktif linki belirle
     updateActiveLink(window.scrollY);
@@ -21,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // İletişim linkine tıklandığında
             if (targetId === '#contact') {
-                e.stopPropagation(); // Event propagation'ı durdur
+                e.stopPropagation();
                 toast.error('İletişim bölümü şu anda bakımdadır. En kısa sürede aktif olacaktır.', 5000);
                 return;
             }
@@ -30,6 +68,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const targetSection = document.querySelector(targetId);
             
             if (targetSection) {
+                // Mobil menüyü kapat
+                if (mobileMenu.classList.contains('active')) {
+                    toggleMobileMenu();
+                }
+
                 isScrolling = true;
                 navLinks.forEach(l => l.classList.remove('active'));
                 link.classList.add('active');
@@ -48,113 +91,72 @@ document.addEventListener('DOMContentLoaded', () => {
                         autoKill: false
                     },
                     ease: "power2.inOut",
-                    onStart: () => {
-                        gsap.to(targetSection, {
-                            duration: 0.5,
-                            scale: 1.02,
-                            ease: "power2.out"
-                        });
-                    },
                     onComplete: () => {
                         isScrolling = false;
                         updateActiveLink(window.scrollY);
-                        gsap.to(targetSection, {
-                            duration: 0.5,
-                            scale: 1,
-                            ease: "power2.out"
-                        });
                     }
                 });
             }
         });
     });
 
-    // Scroll event listener
+    // Scroll event listener - throttle ile optimize edildi
+    let lastTime = 0;
+    const throttleDelay = 100; // 100ms
+
     window.addEventListener('scroll', () => {
-        if (isScrolling) return;
+        const now = Date.now();
         
-        lastScrollY = window.scrollY;
-        if (!ticking) {
-            window.requestAnimationFrame(() => {
+        if (now - lastTime >= throttleDelay) {
+            if (!isScrolling) {
+                lastScrollY = window.scrollY;
                 handleScroll(lastScrollY);
-                if (!isScrolling) {
-                    updateActiveLink(lastScrollY);
-                }
-                ticking = false;
-            });
-            ticking = true;
+                updateActiveLink(lastScrollY);
+            }
+            lastTime = now;
         }
     }, { passive: true });
 
     function handleScroll(scrollY) {
-        if (scrollY > 100) {
-            navMenu.classList.add('scrolled');
+        const nav = document.querySelector('nav');
+        if (scrollY > 50) {
+            nav.classList.add('scrolled');
         } else {
-            navMenu.classList.remove('scrolled');
+            nav.classList.remove('scrolled');
         }
     }
 
     function updateActiveLink(scrollY) {
         if (isScrolling) return;
 
-        const sections = document.querySelectorAll('section[id], header[id]');
-        const windowHeight = window.innerHeight;
-        const documentHeight = Math.max(
-            document.body.scrollHeight,
-            document.body.offsetHeight,
-            document.documentElement.clientHeight,
-            document.documentElement.scrollHeight,
-            document.documentElement.offsetHeight
-        );
-        
-        const isAtBottom = (windowHeight + scrollY) >= documentHeight - 50;
-        
-        if (isAtBottom) {
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === '#contact') {
-                    link.classList.add('active');
-                }
-            });
-            return;
-        }
-
-        // Görünür bölüm tespiti
-        let currentSection = null;
-        let maxVisibility = 0;
+        const sections = document.querySelectorAll('section[id]');
+        let currentSection = '';
 
         sections.forEach(section => {
-            const rect = section.getBoundingClientRect();
-            const sectionHeight = rect.height;
-            const visibleHeight = Math.min(windowHeight, Math.max(0, 
-                Math.min(rect.bottom, windowHeight) - Math.max(rect.top, 0)
-            ));
-            const visibilityRatio = visibleHeight / sectionHeight;
-
-            if (visibilityRatio > maxVisibility) {
-                maxVisibility = visibilityRatio;
-                currentSection = section;
+            const sectionTop = section.offsetTop - 100;
+            const sectionHeight = section.offsetHeight;
+            
+            if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+                currentSection = section.getAttribute('id');
             }
         });
 
-        if (currentSection) {
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${currentSection.id}`) {
-                    link.classList.add('active');
-                }
-            });
-        }
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${currentSection}`) {
+                link.classList.add('active');
+            }
+        });
     }
 });
 
 // Sayfa yüklendiğinde ve resize olduğunda section offsetları güncelle
-let sectionOffsets = {};
 function updateSectionOffsets() {
-    document.querySelectorAll('section[id]').forEach(section => {
-        sectionOffsets[section.id] = section.offsetTop;
+    const sections = document.querySelectorAll('section[id]');
+    sections.forEach(section => {
+        section.dataset.offset = section.offsetTop;
     });
 }
-    
+
 window.addEventListener('load', updateSectionOffsets);
-window.addEventListener('resize', updateSectionOffsets);
+window.addEventListener('resize', debounce(updateSectionOffsets, 150));

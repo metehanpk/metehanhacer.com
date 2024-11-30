@@ -533,6 +533,56 @@ function showVideoModal(item) {
     });
 }
 
+// Mobil menü yönetimi
+function initMobileMenu() {
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileMenuContent = mobileMenu.querySelector('div');
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+    // Mobil menü toggle
+    mobileMenuButton.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleMobileMenu();
+    });
+
+    // Sayfa dışı tıklamada menüyü kapat
+    document.addEventListener('click', (e) => {
+        if (mobileMenu.classList.contains('active') && 
+            !mobileMenu.contains(e.target) && 
+            !mobileMenuButton.contains(e.target)) {
+            toggleMobileMenu();
+        }
+    });
+
+    // Mobil menü linklerine tıklama
+    mobileNavLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            toggleMobileMenu();
+        });
+    });
+
+    function toggleMobileMenu() {
+        const isOpen = mobileMenu.classList.contains('active');
+        
+        if (!isOpen) {
+            mobileMenu.style.display = 'block';
+            setTimeout(() => {
+                mobileMenuContent.style.opacity = '1';
+                mobileMenuContent.style.transform = 'translateY(0)';
+            }, 10);
+            mobileMenu.classList.add('active');
+        } else {
+            mobileMenuContent.style.opacity = '0';
+            mobileMenuContent.style.transform = 'translateY(-0.5rem)';
+            setTimeout(() => {
+                mobileMenu.style.display = 'none';
+                mobileMenu.classList.remove('active');
+            }, 300);
+        }
+    }
+}
+
 // Navigation
 function initNavigation() {
     const mobileMenuButton = document.querySelector('[data-mobile-menu-button]');
@@ -661,4 +711,5 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeAboutAnimations();
     initializeContactAnimations();
     initNavigation();
+    initMobileMenu();
 });
