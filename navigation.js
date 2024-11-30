@@ -16,18 +16,22 @@ document.addEventListener('DOMContentLoaded', () => {
         const isOpen = mobileMenu.classList.contains('active');
         
         if (!isOpen) {
+            // Menüyü aç
+            document.body.style.overflow = 'hidden'; // Scroll'u engelle
+            mobileMenu.classList.add('active');
             mobileMenu.style.display = 'block';
             requestAnimationFrame(() => {
                 mobileMenuContent.style.opacity = '1';
                 mobileMenuContent.style.transform = 'translateY(0)';
-                mobileMenu.classList.add('active');
             });
         } else {
+            // Menüyü kapat
             mobileMenuContent.style.opacity = '0';
-            mobileMenuContent.style.transform = 'translateY(-0.5rem)';
+            mobileMenuContent.style.transform = 'translateY(-1rem)';
             setTimeout(() => {
-                mobileMenu.style.display = 'none';
                 mobileMenu.classList.remove('active');
+                mobileMenu.style.display = 'none';
+                document.body.style.overflow = ''; // Scroll'u serbest bırak
             }, 300);
         }
     }
@@ -71,6 +75,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const targetSection = document.querySelector(targetId);
             
             if (targetSection) {
+                isScrolling = true;
+
                 // Mobil menüyü kapat
                 if (mobileMenu.classList.contains('active')) {
                     toggleMobileMenu();
@@ -78,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     await new Promise(resolve => setTimeout(resolve, 300));
                 }
 
-                isScrolling = true;
+                // Aktif linki güncelle
                 navLinks.forEach(l => l.classList.remove('active'));
                 link.classList.add('active');
 
@@ -86,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const headerHeight = document.querySelector('nav').offsetHeight;
                 const offset = window.innerWidth <= 768 ? headerHeight + 20 : 50;
 
-                // Gelişmiş scroll animasyonu
+                // Smooth scroll animasyonu
                 const currentScroll = window.pageYOffset;
                 const targetScroll = targetSection.offsetTop - offset;
                 const distance = Math.abs(targetScroll - currentScroll);
@@ -139,10 +145,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const sections = document.querySelectorAll('section[id]');
         const headerHeight = document.querySelector('nav').offsetHeight;
-        const offset = window.innerWidth <= 768 ? headerHeight : 100;
+        const offset = window.innerWidth <= 768 ? headerHeight + 20 : 100;
         
         let currentSection = '';
-        
+
         sections.forEach(section => {
             const sectionTop = section.offsetTop - offset;
             const sectionHeight = section.offsetHeight;
