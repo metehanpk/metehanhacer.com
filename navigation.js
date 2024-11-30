@@ -18,8 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!isOpen) {
             // Menüyü aç
             document.body.style.overflow = 'hidden'; // Scroll'u engelle
-            mobileMenu.classList.add('active');
             mobileMenu.style.display = 'block';
+            mobileMenu.classList.add('active');
             requestAnimationFrame(() => {
                 mobileMenuContent.style.opacity = '1';
                 mobileMenuContent.style.transform = 'translateY(0)';
@@ -59,11 +59,12 @@ document.addEventListener('DOMContentLoaded', () => {
     navLinks.forEach(link => {
         link.addEventListener('click', async (e) => {
             e.preventDefault();
+            e.stopPropagation();
+
             const targetId = e.currentTarget.getAttribute('href');
             
             // İletişim linkine tıklandığında
             if (targetId === '#contact') {
-                e.stopPropagation();
                 toast.error('İletişim bölümü şu anda bakımdadır. En kısa sürede aktif olacaktır.', 5000);
                 if (mobileMenu.classList.contains('active')) {
                     toggleMobileMenu();
@@ -72,11 +73,13 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             if (isScrolling) return;
-            const targetSection = document.querySelector(targetId);
-            
-            if (targetSection) {
-                isScrolling = true;
 
+            const targetSection = document.querySelector(targetId);
+            if (!targetSection) return;
+
+            isScrolling = true;
+
+            try {
                 // Mobil menüyü kapat
                 if (mobileMenu.classList.contains('active')) {
                     toggleMobileMenu();
@@ -89,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 link.classList.add('active');
 
                 // Header yüksekliğini hesapla
-                const headerHeight = document.querySelector('nav').offsetHeight;
+                const headerHeight = document.querySelector('nav').offsetHeight || 0;
                 const offset = window.innerWidth <= 768 ? headerHeight + 20 : 50;
 
                 // Smooth scroll animasyonu
@@ -108,6 +111,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     ease: "power2.out"
                 });
 
+                // URL'i güncelle
+                history.pushState(null, '', targetId);
+            } catch (error) {
+                console.error('Scroll error:', error);
+            } finally {
                 isScrolling = false;
                 updateActiveLink(window.scrollY);
             }
@@ -144,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (isScrolling) return;
 
         const sections = document.querySelectorAll('section[id]');
-        const headerHeight = document.querySelector('nav').offsetHeight;
+        const headerHeight = document.querySelector('nav').offsetHeight || 0;
         const offset = window.innerWidth <= 768 ? headerHeight + 20 : 100;
         
         let currentSection = '';
@@ -170,7 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // Sayfa yüklendiğinde ve resize olduğunda section offsetları güncelle
 function updateSectionOffsets() {
     const sections = document.querySelectorAll('section[id]');
-    const headerHeight = document.querySelector('nav').offsetHeight;
+    const headerHeight = document.querySelector('nav').offsetHeight || 0;
     
     sections.forEach(section => {
         section.dataset.offset = section.offsetTop - headerHeight;
