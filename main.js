@@ -539,12 +539,46 @@ function initMobileMenu() {
     const mobileMenu = document.getElementById('mobile-menu');
     const mobileMenuContent = mobileMenu.querySelector('div');
     const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+    let isAnimating = false;
+
+    // Scroll kilitleme fonksiyonu
+    function toggleScrollLock(lock) {
+        document.body.style.overflow = lock ? 'hidden' : '';
+        document.body.style.touchAction = lock ? 'none' : '';
+    }
+
+    // Menü buton durumunu güncelle
+    function updateMenuButtonState(isOpen) {
+        const spans = mobileMenuButton.querySelectorAll('span');
+        spans.forEach((span, index) => {
+            if (isOpen) {
+                span.style.transition = 'transform 0.3s ease-in-out';
+                if (index === 0) span.style.transform = 'rotate(45deg) translate(6px, 6px)';
+                else if (index === 1) span.style.opacity = '0';
+                else if (index === 2) span.style.transform = 'rotate(-45deg) translate(6px, -6px)';
+            } else {
+                span.style.transition = 'transform 0.3s ease-in-out';
+                span.style.transform = '';
+                span.style.opacity = '';
+            }
+        });
+    }
 
     // Mobil menü toggle
     mobileMenuButton.addEventListener('click', (e) => {
         e.stopPropagation();
-        toggleMobileMenu();
+        if (!isAnimating) toggleMobileMenu();
     });
+
+    // Touch olayları için pasif listener
+    document.addEventListener('touchstart', (e) => {
+        if (mobileMenu.classList.contains('active') && 
+            !mobileMenu.contains(e.target) && 
+            !mobileMenuButton.contains(e.target)) {
+            e.preventDefault();
+            toggleMobileMenu();
+        }
+    }, { passive: false });
 
     // Sayfa dışı tıklamada menüyü kapat
     document.addEventListener('click', (e) => {
@@ -559,25 +593,47 @@ function initMobileMenu() {
     mobileNavLinks.forEach(link => {
         link.addEventListener('click', () => {
             toggleMobileMenu();
+            // Smooth scroll için timeout
+            setTimeout(() => {
+                const targetId = link.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                }
+            }, 300);
         });
     });
 
     function toggleMobileMenu() {
+        if (isAnimating) return;
+        isAnimating = true;
+        
         const isOpen = mobileMenu.classList.contains('active');
         
         if (!isOpen) {
             mobileMenu.style.display = 'block';
-            setTimeout(() => {
+            toggleScrollLock(true);
+            updateMenuButtonState(true);
+            
+            requestAnimationFrame(() => {
                 mobileMenuContent.style.opacity = '1';
                 mobileMenuContent.style.transform = 'translateY(0)';
-            }, 10);
-            mobileMenu.classList.add('active');
+                
+                setTimeout(() => {
+                    mobileMenu.classList.add('active');
+                    isAnimating = false;
+                }, 300);
+            });
         } else {
             mobileMenuContent.style.opacity = '0';
             mobileMenuContent.style.transform = 'translateY(-0.5rem)';
+            toggleScrollLock(false);
+            updateMenuButtonState(false);
+            
             setTimeout(() => {
                 mobileMenu.style.display = 'none';
                 mobileMenu.classList.remove('active');
+                isAnimating = false;
             }, 300);
         }
     }
