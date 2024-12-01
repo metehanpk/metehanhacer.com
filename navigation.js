@@ -2,7 +2,7 @@
 gsap.registerPlugin(ScrollToPlugin);
 
 // Navigasyon işlevleri
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function() {
     const mobileMenuButton = document.getElementById('mobile-menu-button');
     const mobileMenu = document.getElementById('mobile-menu');
     const mobileLinks = document.querySelectorAll('.mobile-nav-link');
@@ -143,29 +143,23 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Scroll event listener - throttle ile optimize edildi
-    let lastTime = 0;
-    const throttleDelay = 100;
-
-    window.addEventListener('scroll', () => {
-        const now = Date.now();
-        
-        if (now - lastTime >= throttleDelay) {
-            if (!isScrolling) {
-                lastScrollY = window.scrollY;
-                handleScroll(lastScrollY);
-                updateActiveLink(lastScrollY);
-            }
-            lastTime = now;
+    // Scroll event listener with Lodash debounce
+    window.addEventListener('scroll', _.debounce(function() {
+        if (!isScrolling) {
+            lastScrollY = window.scrollY;
+            handleScroll(lastScrollY);
+            updateActiveLink(lastScrollY);
         }
-    }, { passive: true });
+    }, 100));
 
     function handleScroll(scrollY) {
         const nav = document.querySelector('nav');
-        if (scrollY > 50) {
-            nav.classList.add('scrolled');
-        } else {
-            nav.classList.remove('scrolled');
+        if (nav) {
+            if (scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
         }
     }
 
@@ -208,4 +202,4 @@ function updateSectionOffsets() {
 }
 
 window.addEventListener('load', updateSectionOffsets);
-window.addEventListener('resize', debounce(updateSectionOffsets, 150));
+window.addEventListener('resize', _.debounce(updateSectionOffsets, 150));

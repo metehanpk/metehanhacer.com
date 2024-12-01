@@ -287,7 +287,7 @@ const portfolioItems = [
     },
     {
         title: "Tekstil Reklamı 2",
-        description: "Kurumsal Tanıtım",
+        description: "Bakımdadır",
         type: "special",
         imageSrc: "./assets/Ekran görüntüsü 2024-11-26 235137.png",
         videoSrc: "https://www.youtube.com/embed/kaAFLfuZDJU?autoplay=1&modestbranding=1&rel=0&showinfo=0",
@@ -296,7 +296,7 @@ const portfolioItems = [
     },
     {
         title: "Sosyal Medya İçin Mizah İçerikleri",
-        description: "",
+        description: "Bakımdadır",
         type: "center",
         imageSrc: "./assets/Ekran görüntüsü 2024-11-27 013848.png",
         videoSrc: "https://www.youtube.com/embed/dyyecdNEuF0?autoplay=1&modestbranding=1&rel=0&showinfo=0",
@@ -305,7 +305,7 @@ const portfolioItems = [
     },
     {
         title: "Logo Animasyonu Örneği",
-        description: "Animasyon Çalışmalarım",
+        description: "Bakımdadır",
         type: "center-main",
         imageSrc: "./assets/Ekran görüntüsü 2024-11-28 201449.png",
         videoSrc: "https://www.youtube.com/embed/DwEdm3FLbzU?autoplay=1&modestbranding=1&rel=0&showinfo=0",
