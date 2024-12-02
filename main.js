@@ -720,23 +720,40 @@ function initNavigation() {
     }
 }
 
-// Hero section butonları için smooth scroll
-document.querySelectorAll('.hero-section a[href^="#"]').forEach(anchor => {
+// Smooth scroll implementation
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
         const targetId = this.getAttribute('href');
-        const targetSection = document.querySelector(targetId);
+        if (targetId === '#') return;
         
-        if (targetSection) {
-            gsap.to(window, {
-                duration: 1,
-                scrollTo: {
-                    y: targetSection,
-                    offsetY: 50
-                },
-                ease: "power2.inOut"
-            });
+        const targetElement = document.querySelector(targetId);
+        if (!targetElement) return;
+
+        const headerOffset = 80;
+        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+        const startPosition = window.pageYOffset;
+        const distance = targetPosition - startPosition - headerOffset;
+        
+        const duration = 500; // ms
+        const start = performance.now();
+        
+        function ease(t) {
+            return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
         }
+
+        function animation(currentTime) {
+            const timeElapsed = currentTime - start;
+            const progress = Math.min(timeElapsed / duration, 1);
+            
+            window.scrollTo(0, startPosition + distance * ease(progress));
+            
+            if (progress < 1) {
+                requestAnimationFrame(animation);
+            }
+        }
+        
+        requestAnimationFrame(animation);
     });
 });
 
